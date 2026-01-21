@@ -46,7 +46,29 @@ function App() {
     languages: [{ id: crypto.randomUUID(), language: '', level: '' }],
   });
   const isValid = validateData(cvData);
-  return <>{isValid ? <DataCollector /> : <DataPreview />}</>;
+
+  function handleChange() {}
+  function handleCollectionSubmit() {}
+  function handleEdit() {}
+  function handlePreviewSubmit() {}
+
+  return (
+    <>
+      {isValid ? (
+        <DataCollector
+          data={cvData}
+          onChange={handleChange}
+          onSubmit={handleCollectionSubmit}
+        />
+      ) : (
+        <DataPreview
+          data={cvData}
+          onEdit={handleEdit}
+          onSubmit={handlePreviewSubmit}
+        />
+      )}
+    </>
+  );
 }
 
 export default App;

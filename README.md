@@ -50,3 +50,15 @@ The App component will need three children to achieve its task:
   There will be also a derived state to tell App whether the data are valid or not
   const isValid = validateData(cvData);
   where validateData(data) is an utility function to validate the data.
+  - DataCollector Component:
+    It is a wizard which has seven children each responsible to collect data of each section.
+    That is:
+  - Header
+  - Summary
+  - Experience
+  - Skills
+  - Education
+  - Languages
+    DataCollector will coordinate these children using the state currentStep which will indicate at which step we are currently are. It will not allow to go to the next step unless the data of the current step is validated. So every child should request validation of its data if the user request to go to the next step.
+    this is how the state will be defined:
+    const currentStep = useState(o);
