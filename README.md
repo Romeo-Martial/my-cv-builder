@@ -62,3 +62,6 @@ The App component will need three children to achieve its task:
     DataCollector will coordinate these children using the state currentStep which will indicate at which step we are currently are. It will not allow to go to the next step unless the data of the current step is validated. So every child should request validation of its data if the user request to go to the next step.
     this is how the state will be defined:
     const currentStep = useState(o);
+
+    Now I'll need to implement each child of DataCollector.
+    Each child will render controlled input components; they will receive data related to their field and a way to request change.

@@ -1,3 +1,10 @@
-export default function SummaryCollector() {
-  return <h2>This component is dedicated to collect summary information</h2>;
+import Input from '../Controls/Controls';
+
+export default function SummaryCollector({ data, onChange }) {
+  return (
+    <>
+      <h2>Professional Summary</h2>
+      <Input type="textarea" label="Summary" value={data} onChange={onChange} />
+    </>
+  );
 }
