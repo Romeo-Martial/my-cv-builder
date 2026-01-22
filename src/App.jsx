@@ -151,7 +151,13 @@ function App() {
         break;
     }
   }
-  function handleDelete() {}
+  function handleDelete(step, id) {
+    const section = sections[step];
+    setCvData(cvd => ({
+      ...cvd,
+      [section]: cvd[section].filter(elt => elt.id !== id),
+    }));
+  }
   function handleCollectionSubmit() {}
   function handleEdit() {}
   function handlePreviewSubmit() {}

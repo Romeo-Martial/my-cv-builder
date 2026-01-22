@@ -43,7 +43,9 @@ export default function ExperienceItemCollector({
         onChange={e => onChange(e, step, id)}
       />
       <button onClick={() => onAdd(step)}>Add Experience</button>
-      {!isUnique && <button onClick={onDelete}>Delete Experience</button>}
+      {!isUnique && (
+        <button onClick={() => onDelete(step, id)}>Delete Experience</button>
+      )}
     </>
   );
 }
