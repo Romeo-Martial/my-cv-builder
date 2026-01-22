@@ -1,35 +1,27 @@
-import Input from '../Controls/Controls';
+import ExperienceItemCollector from './ExperienceItemCollector';
 
-export default function ExperienceCollector({ data, onChange, step }) {
-  const { id, company, position, responsibilities, from, to } = data;
+export default function ExperienceCollector({
+  data,
+  step,
+  onChange,
+  onAdd,
+  onDelete,
+}) {
+  const isUnique = data.length === 1;
   return (
     <>
       <h2>Work Experience</h2>
-      <Input
-        label="Company"
-        value={company}
-        onChange={e => onChange(e, step, id)}
-      />
-      <Input
-        label="Position"
-        value={position}
-        onChange={e => onChange(e, step, id)}
-      />
-      <Input
-        label="Responsibilities"
-        value={responsibilities}
-        onChange={e => onChange(e, step, id)}
-      />
-      <Input
-        label="Start Date"
-        value={from}
-        onChange={e => onChange(e, step, id)}
-      />
-      <Input
-        label="End Date"
-        value={to}
-        onChange={e => onChange(e, step, id)}
-      />
+      {data.map(elt => (
+        <ExperienceItemCollector
+          key={elt.id}
+          data={elt}
+          step={step}
+          isUnique={isUnique}
+          onChange={onChange}
+          onAdd={onAdd}
+          onDelete={onDelete}
+        />
+      ))}
     </>
   );
 }

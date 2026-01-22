@@ -14,7 +14,13 @@ import {
   validateLanguages,
 } from '../Utils/validateData';
 
-export default function DataCollector({ data, onChange, onSubmit }) {
+export default function DataCollector({
+  data,
+  onChange,
+  onAdd,
+  onDelete,
+  onSubmit,
+}) {
   const [currentStep, setCurrentStep] = useState(0);
   const { header, summary, experience, skills, education, languages } = data;
 
@@ -69,6 +75,8 @@ export default function DataCollector({ data, onChange, onSubmit }) {
             data={experience}
             step={currentStep}
             onChange={onChange}
+            onAdd={onAdd}
+            onDelete={onDelete}
           />
         );
       case 3:
@@ -85,6 +93,8 @@ export default function DataCollector({ data, onChange, onSubmit }) {
             data={education}
             step={currentStep}
             onChange={onChange}
+            onAdd={onAdd}
+            onDelete={onDelete}
           />
         );
       case 5:
@@ -93,6 +103,8 @@ export default function DataCollector({ data, onChange, onSubmit }) {
             data={languages}
             step={currentStep}
             onChange={onChange}
+            onAdd={onAdd}
+            onDelete={onDelete}
           />
         );
     }
@@ -100,11 +112,15 @@ export default function DataCollector({ data, onChange, onSubmit }) {
 
   return (
     <>
+      <h2>Step {currentStep + 1} of 6</h2>
+      <div></div>
       {currentCollector(currentStep)}
-      <button disabled={currentStep === 0} onClick={handlePrevious}>
-        Previous
-      </button>
-      <button onClick={handleNext}>Next</button>
+      <div>
+        <button disabled={currentStep === 0} onClick={handlePrevious}>
+          Previous
+        </button>
+        <button onClick={handleNext}>Next</button>
+      </div>
     </>
   );
 }

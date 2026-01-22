@@ -65,3 +65,4 @@ The App component will need three children to achieve its task:
 
     Now I'll need to implement each child of DataCollector.
     Each child will render controlled input components; they will receive data related to their field and a way to request change.
+

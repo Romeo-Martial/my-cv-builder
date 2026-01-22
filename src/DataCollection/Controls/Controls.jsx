@@ -1,11 +1,24 @@
-export default function Input({ label, name, value, onChange, type = 'text' }) {
+export default function Input({
+  label,
+  name,
+  value,
+  onChange,
+  type = 'text',
+  placeholder,
+}) {
   return (
     <div>
       <label>{label + ': '}</label>
-      {type === 'text' ? (
-        <input type="text" name={name} value={value} onChange={onChange} />
+      {type === 'textarea' ? (
+        <textarea value={value} onChange={onChange} placeholder={placeholder} />
       ) : (
-        <textarea value={value} onChange={onChange} />
+        <input
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
       )}
     </div>
   );

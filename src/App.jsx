@@ -45,19 +45,19 @@ function App() {
     ],
     languages: [{ id: crypto.randomUUID(), language: '', level: '' }],
   });
+  const sections = [
+    'header',
+    'summary',
+    'experience',
+    'skills',
+    'education',
+    'languages',
+  ];
   const { header, summary, experience, skills, education, languages } = cvData;
   const isValid = validateData(cvData);
 
   function handleArrayChange(e, step, id) {
     const { name, value } = e.target;
-    const sections = [
-      'header',
-      'summary',
-      'experience',
-      'skills',
-      'education',
-      'languages',
-    ];
     const section = sections[step];
     setCvData(cvd => {
       const index = cvd[section].findIndex(elt => elt.id === id);
@@ -105,6 +105,53 @@ function App() {
         break;
     }
   }
+  function handleAdd(step) {
+    const section = sections[step];
+    switch (section) {
+      case 'experience':
+        setCvData(cvd => ({
+          ...cvd,
+          experience: [
+            ...cvd.experience,
+            {
+              id: crypto.randomUUID(),
+              company: '',
+              position: '',
+              responsibilities: [],
+              from: '',
+              to: '',
+            },
+          ],
+        }));
+        break;
+      case 'education':
+        setCvData(cvd => ({
+          ...cvd,
+          education: [
+            ...cvd.education,
+            {
+              id: crypto.randomUUID(),
+              program: '',
+              provider: '',
+              educationLocation: '',
+              educationFrom: '',
+              educationTo: '',
+            },
+          ],
+        }));
+        break;
+      case 'languages':
+        setCvData(cvd => ({
+          ...cvd,
+          languages: [
+            ...cvd.languages,
+            { id: crypto.randomUUID(), language: '', level: '' },
+          ],
+        }));
+        break;
+    }
+  }
+  function handleDelete() {}
   function handleCollectionSubmit() {}
   function handleEdit() {}
   function handlePreviewSubmit() {}
@@ -115,6 +162,8 @@ function App() {
         <DataCollector
           data={cvData}
           onChange={handleChange}
+          onAdd={handleAdd}
+          onDelete={handleDelete}
           onSubmit={handleCollectionSubmit}
         />
       ) : (
