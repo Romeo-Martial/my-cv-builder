@@ -39,7 +39,7 @@ export default function DataCollector({ data, onChange, onSubmit }) {
       case 4:
         validateEducation(education) && setCurrentStep(cs => cs + 1);
         break;
-    case 5:
+      case 5:
         validateLanguages(languages) && onSubmit(data);
         break;
     }
@@ -48,17 +48,53 @@ export default function DataCollector({ data, onChange, onSubmit }) {
   const currentCollector = function (step) {
     switch (step) {
       case 0:
-        return <HeaderCollector data={header} onChange={onChange} />;
+        return (
+          <HeaderCollector
+            data={header}
+            step={currentStep}
+            onChange={onChange}
+          />
+        );
       case 1:
-        return <SummaryCollector data={summary} onChange={onChange} />;
+        return (
+          <SummaryCollector
+            data={summary}
+            step={currentStep}
+            onChange={onChange}
+          />
+        );
       case 2:
-        return <ExperienceCollector data={experience} onChange={onChange} />;
+        return (
+          <ExperienceCollector
+            data={experience}
+            step={currentStep}
+            onChange={onChange}
+          />
+        );
       case 3:
-        return <SkillsCollector data={skills} onChange={onChange} />;
+        return (
+          <SkillsCollector
+            data={skills}
+            step={currentStep}
+            onChange={onChange}
+          />
+        );
       case 4:
-        return <EducationCollector data={education} onChange={onChange} />;
+        return (
+          <EducationCollector
+            data={education}
+            step={currentStep}
+            onChange={onChange}
+          />
+        );
       case 5:
-        return <LanguagesCollector data={languages} onChange={onChange} />;
+        return (
+          <LanguagesCollector
+            data={languages}
+            step={currentStep}
+            onChange={onChange}
+          />
+        );
     }
   };
 
