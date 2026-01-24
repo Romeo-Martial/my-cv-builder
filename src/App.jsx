@@ -24,14 +24,14 @@ function App() {
         id: crypto.randomUUID(),
         company: '',
         position: '',
-        responsibilities: [],
+        responsibilities: [{ id: crypto.randomUUID(), text: '' }],
         from: '',
         to: '',
       },
     ],
     skills: {
-      technical: [],
-      soft: [],
+      technical: [{ id: crypto.randomUUID(), skil: '' }],
+      soft: [{ id: crypto.randomUUID(), skill: '' }],
     },
     education: [
       {
@@ -56,24 +56,50 @@ function App() {
   const { header, summary, experience, skills, education, languages } = cvData;
   const isValid = validateData(cvData);
 
-  function handleArrayChange(e, step, id) {
+  function handleArrayChange(e, step, id, parentId = null) {
     const { name, value } = e.target;
     const section = sections[step];
-    setCvData(cvd => {
-      const index = cvd[section].findIndex(elt => elt.id === id);
-      return {
-        ...cvd,
-        [section]: [
-          // Update the specific section
-          ...cvd[section].slice(0, index),
-          { ...cvd[section][index], [name]: value },
-          ...cvd[section].slice(index + 1),
-        ],
-      };
-    });
+    if (name.startsWith('responsibility')) {
+      setCvData(cvd => {
+        const parentIndex = cvd.experience.findIndex(
+          elt => elt.id === parentId
+        );
+        console.log('parent index', parentIndex);
+        const responsibilities = cvd.experience[parentIndex].responsibilities;
+        const index = responsibilities.findIndex(elt => elt.id === id);
+        return {
+          ...cvd,
+          experience: [
+            ...cvd.experience.slice(0, parentIndex),
+            {
+              ...cvd.experience[parentIndex],
+              responsibilities: [
+                ...responsibilities.slice(0, index),
+                { id: id, text: value },
+                ...responsibilities.slice(index + 1),
+              ],
+            },
+            ...cvd.experience.slice(parentIndex + 1),
+          ],
+        };
+      });
+    } else {
+      setCvData(cvd => {
+        const index = cvd[section].findIndex(elt => elt.id === id);
+        return {
+          ...cvd,
+          [section]: [
+            // Update the specific section
+            ...cvd[section].slice(0, index),
+            { ...cvd[section][index], [name]: value },
+            ...cvd[section].slice(index + 1),
+          ],
+        };
+      });
+    }
   }
 
-  function handleChange(e, step, id = null) {
+  function handleChange(e, step, id = null, parentId = null) {
     const { name, value } = e.target;
     switch (step) {
       case 0:
@@ -101,7 +127,7 @@ function App() {
       case 4:
         break;
       default:
-        handleArrayChange(e, step, id);
+        handleArrayChange(e, step, id, parentId);
         break;
     }
   }
@@ -117,7 +143,7 @@ function App() {
               id: crypto.randomUUID(),
               company: '',
               position: '',
-              responsibilities: [],
+              responsibilities: [{ id: crypto.randomUUID(), text: '' }],
               from: '',
               to: '',
             },

@@ -26,6 +26,7 @@ export default function SummaryCollector({ data, onChange, step }) {
       </div>
       <Input
         type="textarea"
+        name="summary"
         label="Summary"
         value={data}
         onChange={e => onChange(e, step)}

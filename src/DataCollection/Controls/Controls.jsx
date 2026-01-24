@@ -10,7 +10,12 @@ export default function Input({
     <div>
       <label>{label + ': '}</label>
       {type === 'textarea' ? (
-        <textarea value={value} onChange={onChange} placeholder={placeholder} />
+        <textarea
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
       ) : (
         <input
           type={type}
