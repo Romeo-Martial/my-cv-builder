@@ -5,7 +5,9 @@ export default function ExperienceCollector({
   step,
   onChange,
   onAdd,
+  onChildAdd,
   onDelete,
+  onChildDelete
 }) {
   const isUnique = data.length === 1;
   return (
@@ -21,7 +23,9 @@ export default function ExperienceCollector({
               isUnique={isUnique}
               onChange={onChange}
               onAdd={onAdd}
+              onChildAdd={onChildAdd}
               onDelete={onDelete}
+              onChildDelete={onChildDelete}
             />
           </div>
         );

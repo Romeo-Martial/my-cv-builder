@@ -18,7 +18,9 @@ export default function DataCollector({
   data,
   onChange,
   onAdd,
+  onChildAdd,
   onDelete,
+  onChildDelete,
   onSubmit,
 }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -76,7 +78,9 @@ export default function DataCollector({
             step={currentStep}
             onChange={onChange}
             onAdd={onAdd}
+            onChildAdd={onChildAdd}
             onDelete={onDelete}
+            onChildDelete={onChildDelete}
           />
         );
       case 3:

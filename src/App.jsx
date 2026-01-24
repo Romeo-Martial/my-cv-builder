@@ -64,7 +64,6 @@ function App() {
         const parentIndex = cvd.experience.findIndex(
           elt => elt.id === parentId
         );
-        console.log('parent index', parentIndex);
         const responsibilities = cvd.experience[parentIndex].responsibilities;
         const index = responsibilities.findIndex(elt => elt.id === id);
         return {
@@ -131,6 +130,29 @@ function App() {
         break;
     }
   }
+  function handleChildAdd(field, parentId) {
+    switch (field) {
+      case 'responsibilities':
+        setCvData(cvd => {
+          const index = cvd.experience.findIndex(elt => elt.id === parentId);
+          return {
+            ...cvd,
+            experience: [
+              ...cvd.experience.slice(0, index),
+              {
+                ...cvd.experience[index],
+                responsibilities: [
+                  ...cvd.experience[index].responsibilities,
+                  { id: crypto.randomUUID(), text: '' },
+                ],
+              },
+              ...cvd.experience.slice(index + 1),
+            ],
+          };
+        });
+        break;
+    }
+  }
   function handleAdd(step) {
     const section = sections[step];
     switch (section) {
@@ -177,6 +199,33 @@ function App() {
         break;
     }
   }
+
+  function handleChildDelete(field, parentId, childId) {
+    switch (field) {
+      case 'responsibilities':
+        setCvData(cvd => {
+          const parentIndex = cvd.experience.findIndex(
+            elt => elt.id === parentId
+          );
+          const newResponsibilities = cvd.experience[
+            parentIndex
+          ].responsibilities.filter(elt => elt.id !== childId);
+          return {
+            ...cvd,
+            experience: [
+              ...cvd.experience.slice(0, parentIndex),
+              {
+                ...cvd.experience[parentIndex],
+                responsibilities: newResponsibilities,
+              },
+              ...cvd.experience.slice(parentIndex + 1),
+            ],
+          };
+        });
+        break;
+    }
+  }
+
   function handleDelete(step, id) {
     const section = sections[step];
     setCvData(cvd => ({
@@ -195,7 +244,9 @@ function App() {
           data={cvData}
           onChange={handleChange}
           onAdd={handleAdd}
+          onChildAdd={handleChildAdd}
           onDelete={handleDelete}
+          onChildDelete={handleChildDelete}
           onSubmit={handleCollectionSubmit}
         />
       ) : (

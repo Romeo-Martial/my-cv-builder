@@ -1,6 +1,13 @@
 import Input from '../Controls/Controls';
 
-function Responsibilities({ responsibilities, step, parentId, onChange }) {
+function Responsibilities({
+  responsibilities,
+  step,
+  parentId,
+  onChange,
+  onChildAdd,
+  onChildDelete,
+}) {
   const isUnique = responsibilities.length === 1;
   return (
     <>
@@ -16,8 +23,18 @@ function Responsibilities({ responsibilities, step, parentId, onChange }) {
               onChange={e => onChange(e, step, elt.id, parentId)}
               placeholder="Describe your key responsibilities..."
             />
-            {!isUnique && <button>-</button>}
-            <button>+</button>
+            {!isUnique && (
+              <button
+                onClick={() =>
+                  onChildDelete('responsibilities', parentId, elt.id)
+                }
+              >
+                X
+              </button>
+            )}
+            <button onClick={() => onChildAdd('responsibilities', parentId)}>
+              +
+            </button>
           </div>
         );
       })}
@@ -30,7 +47,9 @@ export default function ExperienceItemCollector({
   isUnique,
   onChange,
   onAdd,
+  onChildAdd,
   onDelete,
+  onChildDelete,
   step,
 }) {
   const { id, company, position, responsibilities, from, to } = data;
@@ -56,6 +75,8 @@ export default function ExperienceItemCollector({
         step={step}
         parentId={id}
         onChange={onChange}
+        onChildAdd={onChildAdd}
+        onChildDelete={onChildDelete}
       />
       <Input
         type="date"
