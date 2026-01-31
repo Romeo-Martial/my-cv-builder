@@ -16,6 +16,3 @@ export function validateEducation(education) {
 export function validateLanguages(languages) {
   return true;
 }
-export default function validateData(data) {
-  return true;
-}

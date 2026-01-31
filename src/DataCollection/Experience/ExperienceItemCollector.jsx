@@ -20,7 +20,7 @@ function Responsibilities({
               label={'Responsibility' + ' ' + (index + 1)}
               name={'responsibility' + index}
               value={elt.text}
-              onChange={e => onChange(e, step, elt.id, parentId)}
+              onChange={e => onChange(e, step, parentId, elt.id)}
               placeholder="Describe your key responsibilities..."
             />
             {!isUnique && (

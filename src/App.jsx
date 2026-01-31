@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import './App.css';
-import validateData from './Utils/validateData';
 import DataCollector from './DataCollection/DataCollector';
 import DataPreview from './DataPreview/DataPreview';
+import {
+  validateHeader,
+  validateSummary,
+  validateExperience,
+  validateSkills,
+  validateEducation,
+  validateLanguages,
+} from './Utils/validateData';
 
 function App() {
   const [cvData, setCvData] = useState({
@@ -30,8 +37,8 @@ function App() {
       },
     ],
     skills: {
-      technical: [{ id: crypto.randomUUID(), skil: '' }],
-      soft: [{ id: crypto.randomUUID(), skill: '' }],
+      technical: [],
+      soft: [],
     },
     education: [
       {
@@ -45,6 +52,7 @@ function App() {
     ],
     languages: [{ id: crypto.randomUUID(), language: '', level: '' }],
   });
+  const [currentStep, setCurrentStep] = useState(0);
   const sections = [
     'header',
     'summary',
@@ -54,9 +62,35 @@ function App() {
     'languages',
   ];
   const { header, summary, experience, skills, education, languages } = cvData;
-  const isValid = validateData(cvData);
 
-  function handleArrayChange(e, step, id, parentId = null) {
+  function handlePrevious() {
+    setCurrentStep(cs => cs - 1);
+  }
+
+  function handleNext() {
+    switch (currentStep) {
+      case 0:
+        validateHeader(header) && setCurrentStep(cs => cs + 1);
+        break;
+      case 1:
+        validateSummary(summary) && setCurrentStep(cs => cs + 1);
+        break;
+      case 2:
+        validateExperience(experience) && setCurrentStep(cs => cs + 1);
+        break;
+      case 3:
+        validateSkills(skills) && setCurrentStep(cs => cs + 1);
+        break;
+      case 4:
+        validateEducation(education) && setCurrentStep(cs => cs + 1);
+        break;
+      case 5:
+        validateLanguages(languages) && setCurrentStep(cs => cs + 1);
+        break;
+    }
+  }
+
+  function handleArrayChange(e, step, parentId = null, childId = null) {
     const { name, value } = e.target;
     const section = sections[step];
     if (name.startsWith('responsibility')) {
@@ -65,7 +99,7 @@ function App() {
           elt => elt.id === parentId
         );
         const responsibilities = cvd.experience[parentIndex].responsibilities;
-        const index = responsibilities.findIndex(elt => elt.id === id);
+        const index = responsibilities.findIndex(elt => elt.id === childId);
         return {
           ...cvd,
           experience: [
@@ -74,7 +108,7 @@ function App() {
               ...cvd.experience[parentIndex],
               responsibilities: [
                 ...responsibilities.slice(0, index),
-                { id: id, text: value },
+                { id: childId, text: value },
                 ...responsibilities.slice(index + 1),
               ],
             },
@@ -84,7 +118,8 @@ function App() {
       });
     } else {
       setCvData(cvd => {
-        const index = cvd[section].findIndex(elt => elt.id === id);
+        const index = cvd[section].findIndex(elt => elt.id === parentId);
+        console.log('information', { name, value, step, parentId, index });
         return {
           ...cvd,
           [section]: [
@@ -98,7 +133,13 @@ function App() {
     }
   }
 
-  function handleChange(e, step, id = null, parentId = null) {
+  function handleChange(
+    e,
+    step,
+    parentId = null,
+    childId = null,
+    field = null
+  ) {
     const { name, value } = e.target;
     switch (step) {
       case 0:
@@ -123,14 +164,20 @@ function App() {
       case 1:
         setCvData(cvd => ({ ...cvd, summary: value }));
         break;
-      case 4:
+      case 3:
+        setCvData(cvd => {
+          return {
+            ...cvd,
+            skills: { ...cvd.skills },
+          };
+        });
         break;
       default:
-        handleArrayChange(e, step, id, parentId);
+        handleArrayChange(e, step, parentId, childId);
         break;
     }
   }
-  function handleChildAdd(field, parentId) {
+  function handleChildAdd(field, parentId = null, value = '') {
     switch (field) {
       case 'responsibilities':
         setCvData(cvd => {
@@ -149,6 +196,44 @@ function App() {
               ...cvd.experience.slice(index + 1),
             ],
           };
+        });
+        break;
+      case 'technical':
+        setCvData(cvd => {
+          const index = cvd.skills.technical.findIndex(
+            elt => elt.text === value
+          );
+          if (value !== '' && index === -1) {
+            return {
+              ...cvd,
+              skills: {
+                ...cvd.skills,
+                technical: [
+                  ...cvd.skills.technical,
+                  { id: crypto.randomUUID(), text: value },
+                ],
+              },
+            };
+          }
+          return cvd; // Return unchanged state if not adding
+        });
+        break;
+      case 'soft':
+        setCvData(cvd => {
+          const index = cvd.skills.soft.findIndex(elt => elt.text === value);
+          if (value !== '' && index === -1) {
+            return {
+              ...cvd,
+              skills: {
+                ...cvd.skills,
+                soft: [
+                  ...cvd.skills.soft,
+                  { id: crypto.randomUUID(), text: value },
+                ],
+              },
+            };
+          }
+          return cvd; // Return unchanged state if not adding
         });
         break;
     }
@@ -200,7 +285,7 @@ function App() {
     }
   }
 
-  function handleChildDelete(field, parentId, childId) {
+  function handleChildDelete(field, parentId = null, childId) {
     switch (field) {
       case 'responsibilities':
         setCvData(cvd => {
@@ -223,6 +308,28 @@ function App() {
           };
         });
         break;
+      case 'technical':
+        setCvData(cvd => {
+          return {
+            ...cvd,
+            skills: {
+              ...cvd.skills,
+              technical: cvd.skills.technical.filter(elt => elt.id !== childId),
+            },
+          };
+        });
+        break;
+      case 'soft':
+        setCvData(cvd => {
+          return {
+            ...cvd,
+            skills: {
+              ...cvd.skills,
+              soft: cvd.skills.soft.filter(elt => elt.id !== childId),
+            },
+          };
+        });
+        break;
     }
   }
 
@@ -234,26 +341,31 @@ function App() {
     }));
   }
   function handleCollectionSubmit() {}
-  function handleEdit() {}
+  function handleEdit(step) {
+    setCurrentStep(step);
+  }
   function handlePreviewSubmit() {}
 
   return (
     <>
-      {isValid ? (
+      {currentStep === 6 ? (
+        <DataPreview
+          data={cvData}
+          onEdit={handleEdit}
+          onSubmit={handlePreviewSubmit}
+        />
+      ) : (
         <DataCollector
           data={cvData}
+          step={currentStep}
           onChange={handleChange}
           onAdd={handleAdd}
           onChildAdd={handleChildAdd}
           onDelete={handleDelete}
           onChildDelete={handleChildDelete}
+          onNext={handleNext}
+          onPrevious={handlePrevious}
           onSubmit={handleCollectionSubmit}
-        />
-      ) : (
-        <DataPreview
-          data={cvData}
-          onEdit={handleEdit}
-          onSubmit={handlePreviewSubmit}
         />
       )}
     </>

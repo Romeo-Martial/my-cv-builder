@@ -5,77 +5,36 @@ import SkillsCollector from './Skills/SkillsCollector';
 import EducationCollector from './Education/EducationCollector';
 import LanguagesCollector from './Languages/LanguagesCollector';
 import { useState } from 'react';
-import {
-  validateHeader,
-  validateSummary,
-  validateExperience,
-  validateSkills,
-  validateEducation,
-  validateLanguages,
-} from '../Utils/validateData';
+
 
 export default function DataCollector({
   data,
+  step,
   onChange,
   onAdd,
   onChildAdd,
   onDelete,
   onChildDelete,
-  onSubmit,
+  onNext,
+  onPrevious,
 }) {
-  const [currentStep, setCurrentStep] = useState(0);
   const { header, summary, experience, skills, education, languages } = data;
-
-  function handlePrevious() {
-    setCurrentStep(cs => cs - 1);
-  }
-
-  function handleNext() {
-    switch (currentStep) {
-      case 0:
-        validateHeader(header) && setCurrentStep(cs => cs + 1);
-        break;
-      case 1:
-        validateSummary(summary) && setCurrentStep(cs => cs + 1);
-        break;
-      case 2:
-        validateExperience(experience) && setCurrentStep(cs => cs + 1);
-        break;
-      case 3:
-        validateSkills(skills) && setCurrentStep(cs => cs + 1);
-        break;
-      case 4:
-        validateEducation(education) && setCurrentStep(cs => cs + 1);
-        break;
-      case 5:
-        validateLanguages(languages) && onSubmit(data);
-        break;
-    }
-  }
 
   const currentCollector = function (step) {
     switch (step) {
       case 0:
         return (
-          <HeaderCollector
-            data={header}
-            step={currentStep}
-            onChange={onChange}
-          />
+          <HeaderCollector data={header} step={step} onChange={onChange} />
         );
       case 1:
         return (
-          <SummaryCollector
-            data={summary}
-            step={currentStep}
-            onChange={onChange}
-          />
+          <SummaryCollector data={summary} step={step} onChange={onChange} />
         );
       case 2:
         return (
           <ExperienceCollector
             data={experience}
-            step={currentStep}
+            step={step}
             onChange={onChange}
             onAdd={onAdd}
             onChildAdd={onChildAdd}
@@ -87,15 +46,16 @@ export default function DataCollector({
         return (
           <SkillsCollector
             data={skills}
-            step={currentStep}
-            onChange={onChange}
+            step={step}
+            onChildAdd={onChildAdd}
+            onChildDelete={onChildDelete}
           />
         );
       case 4:
         return (
           <EducationCollector
             data={education}
-            step={currentStep}
+            step={step}
             onChange={onChange}
             onAdd={onAdd}
             onDelete={onDelete}
@@ -105,7 +65,7 @@ export default function DataCollector({
         return (
           <LanguagesCollector
             data={languages}
-            step={currentStep}
+            step={step}
             onChange={onChange}
             onAdd={onAdd}
             onDelete={onDelete}
@@ -116,14 +76,14 @@ export default function DataCollector({
 
   return (
     <>
-      <h2>Step {currentStep + 1} of 6</h2>
+      <h2>Step {step + 1} of 6</h2>
       <div></div>
-      {currentCollector(currentStep)}
+      {currentCollector(step)}
       <div>
-        <button disabled={currentStep === 0} onClick={handlePrevious}>
+        <button disabled={step === 0} onClick={onPrevious}>
           Previous
         </button>
-        <button onClick={handleNext}>Next</button>
+        <button onClick={onNext}>Next</button>
       </div>
     </>
   );
