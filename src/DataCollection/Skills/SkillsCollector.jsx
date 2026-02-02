@@ -19,9 +19,9 @@ export default function SkillsCollector({
       : setSoftInput(e.target.value);
   }
   return (
-    <>
-      <h2>Skills</h2>
-      <p>
+    <div className="stack">
+      <h2 className="it-section-title role-orientation">Skills</h2>
+      <p className="it-section-goal role-instruction">
         Add your technical and soft skills to highlight your capabilities to
         employers.
       </p>
@@ -32,6 +32,7 @@ export default function SkillsCollector({
         placeholder="Enter your technical skills"
       />
       <button
+        className="btn btn--secondary role-action"
         onClick={() => {
           onChildAdd('technical', null, technicalInput);
           setTechnicalInput('');
@@ -40,16 +41,19 @@ export default function SkillsCollector({
         Add
       </button>
       {!isTechnicalEmpty && (
-        <div>
+        <ul className="it-repeater">
           {technical.map(elt => (
-            <div key={elt.id}>
+            <div className="it-repeater-item" key={elt.id}>
               <li>{elt.text}</li>
-              <button onClick={() => onChildDelete('technical', null, elt.id)}>
+              <button
+                className="btn btn--tertiary btn--danger role-action"
+                onClick={() => onChildDelete('technical', null, elt.id)}
+              >
                 x
               </button>
             </div>
           ))}
-        </div>
+        </ul>
       )}
       <Input
         label="Soft Skills"
@@ -58,6 +62,7 @@ export default function SkillsCollector({
         placeholder="Enter your soft skills"
       />
       <button
+        className="btn btn--secondary role-action"
         onClick={() => {
           onChildAdd('soft', null, softInput);
           setSoftInput('');
@@ -66,21 +71,24 @@ export default function SkillsCollector({
         Add
       </button>
       {!isSoftEmpty && (
-        <div>
+        <ul className="it-repeater">
           {soft.map(elt => (
-            <div key={elt.id}>
+            <div className="it-repeater-item" key={elt.id}>
               <li>{elt.text}</li>
-              <button onClick={() => onChildDelete('soft', null, elt.id)}>
+              <button
+                className="btn btn--tertiary btn--danger role-action"
+                onClick={() => onChildDelete('soft', null, elt.id)}
+              >
                 x
               </button>
             </div>
           ))}
-        </div>
+        </ul>
       )}
       {/* Tips Section */}
-      <div>
-        <h4>💡 Tips for Skills</h4>
-        <ul>
+      <div className="it-writing-tips-section role-instruction">
+        <h4 className="it-writing-tips-title">💡 Tips for Skills</h4>
+        <ul className="it-writing-tips-list">
           <li>
             <strong>Technical Skills:</strong> Include programming languages,
             frameworks, tools, and technologies
@@ -94,6 +102,6 @@ export default function SkillsCollector({
           <li>Avoid redundancy between technical and soft skills</li>
         </ul>
       </div>
-    </>
+    </div>
   );
 }

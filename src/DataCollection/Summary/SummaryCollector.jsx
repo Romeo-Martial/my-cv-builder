@@ -5,17 +5,19 @@ export default function SummaryCollector({ data, onChange, step }) {
   const minLength = 50;
   const maxLength = 500;
   return (
-    <>
-      <h2>Professional Summary</h2>
-      <div>
-        <p>
+    <div className="stack">
+      <h2 className="it-section-title role-orientation">
+        Professional Summary
+      </h2>
+      <div className="it-section-instructions role-instruction">
+        <p className="it-section-goal">
           Write a compelling professional summary that highlights your key
           skills, experience, and career goals. This will be the first thing
           employers read on your CV.
         </p>
-        <div>
-          <h4>Guidelines:</h4>
-          <ul>
+        <div className="it-guidelines">
+          <h4 className="it-guidelines-title">Guidelines:</h4>
+          <ul className="it-guidelines-list">
             <li>Keep it concise but impactful (50-500 characters)</li>
             <li>Highlight your most relevant skills and experience</li>
             <li>Mention your career goals or what you're looking for</li>
@@ -31,31 +33,35 @@ export default function SummaryCollector({ data, onChange, step }) {
         value={data}
         onChange={e => onChange(e, step)}
       />
-      <div>
-        {currentLength}/{maxLength} characters
+      <div className="counter">
+        <div className="it-constraint-evaluation role-feedback">
+          {currentLength}/{maxLength} characters
+        </div>
+        <span className="it-constraint role-instruction">
+          (Minimum {minLength} characters required)
+        </span>
       </div>
-      <span>(Minimum {minLength} characters required)</span>
-      <div>
-        <h4>💡 Writing Tips:</h4>
-        <div>
-          <div>
+      <div className="it-writing-tips-section role-instruction">
+        <h4 className="it-writing-tips-title">💡 Writing Tips:</h4>
+        <ul className="it-writing-tips-list">
+          <li className="it-writing-tip">
             <strong>Start Strong:</strong> Begin with your job title and years
             of experience
-          </div>
-          <div>
+          </li>
+          <li className="it-writing-tip">
             <strong>Be Specific:</strong> Mention key technologies, tools, or
             achievements
-          </div>
-          <div>
+          </li>
+          <li className="it-writing-tip">
             <strong>Show Value:</strong> Explain what you bring to potential
             employers
-          </div>
-          <div>
+          </li>
+          <li className="it-writing-tip">
             <strong>End with Goals:</strong> State what you're looking for in
             your next role
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
-    </>
+    </div>
   );
 }

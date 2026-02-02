@@ -1,0 +1,36 @@
+/* --------------------------------------------
+   3) Layout primitives
+   -------------------------------------------- */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+
+.stack > * + * {
+  margin-top: var(--space-4);
+} /* simple vertical rhythm */
+.cluster {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.input-field {
+  flex: 1 1 240px;
+}
+
+.split {
+  display: flex;
+  gap: var(--space-8);
+  align-items: flex-start;
+}
+.split > * {
+  min-width: 0;
+}
+
+@media (max-width: 960px) {
+  .split {
+    flex-direction: column;
+  }
+}

@@ -11,6 +11,7 @@ export default function Input({
       <label>{label + ': '}</label>
       {type === 'textarea' ? (
         <textarea
+          class="textarea"
           name={name}
           value={value}
           onChange={onChange}
@@ -18,6 +19,7 @@ export default function Input({
         />
       ) : (
         <input
+          class="input"
           type={type}
           name={name}
           value={value}

@@ -1,0 +1,79 @@
+/* --------------------------------------------
+   6) Buttons (Action roles)
+   -------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--control-h);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  font-weight: var(--fw-medium);
+  font-size: var(--text-sm);
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 120ms ease, background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Primary */
+.btn--primary {
+  background: var(--brand);
+  color: #fff;
+}
+.btn--primary:hover { background: var(--brand-2); }
+
+/* Secondary */
+.btn--secondary {
+  height: var(--control-h-sm);
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn--secondary:hover { border-color: var(--border-strong); }
+
+/* Tertiary */
+.btn--tertiary {
+  height: auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.btn--tertiary:hover { color: var(--brand-2); }
+
+/* Loading state helper (optional)
+   - Add .is-loading to button and a child .spinner
+*/
+.btn.is-loading { pointer-events: none; }
+.spinner {
+  width: var(--icon);
+  height: var(--icon);
+  border-radius: 999px;
+  border: 2px solid rgba(255,255,255,0.45);
+  border-top-color: rgba(255,255,255,1);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Focus ring for interactive elements */
+.btn:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  box-shadow: var(--ring);
+}

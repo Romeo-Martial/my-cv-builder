@@ -10,44 +10,58 @@ export default function EducationItemCollector({ data, onChange, step }) {
     educationTo,
   } = data;
   return (
-    <>
-      <Input
-        name="program"
-        label="Program"
-        value={program}
-        onChange={e => onChange(e, step, id)}
-        placeholder="Name of the program"
-      />
-      <Input
-        name="provider"
-        label="Institution"
-        value={provider}
-        onChange={e => onChange(e, step, id)}
-        placeholder="Name of the institution"
-      />
-      <Input
-        name="educationLocation"
-        label="Location"
-        value={educationLocation}
-        onChange={e => onChange(e, step, id)}
-        placeholder="City, Country"
-      />
-      <Input
-        type="date"
-        name="educationFrom"
-        label="Start Date"
-        value={educationFrom}
-        onChange={e => onChange(e, step, id)}
-        placeholder="YYYY or YYYY-MM"
-      />
-      <Input
-        type="date"
-        name="educationTo"
-        label="End Date"
-        value={educationTo}
-        onChange={e => onChange(e, step, id)}
-        placeholder="YYYY or YYYY-MM"
-      />
-    </>
+    <div className="stack">
+      <div className="cluster">
+        <div className="input-field">
+          <Input
+            name="program"
+            label="Program"
+            value={program}
+            onChange={e => onChange(e, step, id)}
+            placeholder="Name of the program"
+          />
+        </div>
+        <div className="input-field">
+          <Input
+            name="provider"
+            label="Institution"
+            value={provider}
+            onChange={e => onChange(e, step, id)}
+            placeholder="Name of the institution"
+          />
+        </div>
+        <div className="input-field">
+          <Input
+            name="educationLocation"
+            label="Location"
+            value={educationLocation}
+            onChange={e => onChange(e, step, id)}
+            placeholder="City, Country"
+          />
+        </div>
+      </div>
+      <div className="cluster">
+        <div className="input-field">
+          <Input
+            type="date"
+            name="educationFrom"
+            label="Start Date"
+            value={educationFrom}
+            onChange={e => onChange(e, step, id)}
+            placeholder="YYYY or YYYY-MM"
+          />
+        </div>
+        <div className="input-field">
+          <Input
+            type="date"
+            name="educationTo"
+            label="End Date"
+            value={educationTo}
+            onChange={e => onChange(e, step, id)}
+            placeholder="YYYY or YYYY-MM"
+          />
+        </div>
+      </div>
+    </div>
   );
 }

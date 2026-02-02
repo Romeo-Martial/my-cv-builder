@@ -9,52 +9,66 @@ export default function EducationCollector({
 }) {
   const isUnique = data.length === 1;
   return (
-    <>
-      <h2>Education</h2>
-      <p>
+    <div className="stack">
+      <h2 className="it-section-title role-orientation">Education</h2>
+      <p className="it-section-goal role-instruction">
         Provide details about your educational background, including degrees,
         certifications, and relevant coursework.
       </p>
-      {data.map((elt, index) => {
-        return (
-          <div key={elt.id}>
-            <h3>Education {index + 1}</h3>
-            <EducationItemCollector
-              data={elt}
-              onChange={onChange}
-              step={step}
-            />
-            {!isUnique && (
-              <button onClick={() => onDelete(step, elt.id)}>
-                Delete Education
-              </button>
-            )}
-            <button onClick={() => onAdd(step)}>Add Education</button>
-          </div>
-        );
-      })}
+      <div className="it-repeater stack">
+        {data.map((elt, index) => {
+          return (
+            <div className="it-repeater-item" key={elt.id}>
+              <h3 className="it-subsection-title role-orientation">
+                Education {index + 1}
+              </h3>
+              <EducationItemCollector
+                data={elt}
+                onChange={onChange}
+                step={step}
+              />
+              {!isUnique && (
+                <button
+                  className="btn btn--tertiary btn--danger role-action"
+                  onClick={() => onDelete(step, elt.id)}
+                >
+                  Delete Education
+                </button>
+              )}
+            </div>
+          );
+        })}
+        <button
+          className="btn btn--secondary role-action"
+          onClick={() => onAdd(step)}
+        >
+          Add Education
+        </button>
+      </div>
       {/* Tips Section */}
-      <div>
-        <h4>💡 Education Tips</h4>
-        <ul>
-          <li>
+      <div className="it-writing-tips-section role-instruction">
+        <h4 className="it-writing-tips-title">💡 Education Tips</h4>
+        <ul className="it-writing-tips-list">
+          <li className="it-writing-tip">
             <strong>Program:</strong> Include degree type and field of study
             (e.g., "Bachelor of Science in Computer Science")
           </li>
-          <li>
+          <li className="it-writing-tip">
             <strong>Institution:</strong> Full name of the school, university,
             or institution
           </li>
-          <li>
+          <li className="it-writing-tip">
             <strong>Dates:</strong> Use YYYY or YYYY-MM format for start and end
             dates
           </li>
-          <li>
+          <li className="it-writing-tip">
             List education in reverse chronological order (most recent first)
           </li>
-          <li>Include relevant certifications and professional development</li>
+          <li className="it-writing-tip">
+            Include relevant certifications and professional development
+          </li>
         </ul>
       </div>
-    </>
+    </div>
   );
 }

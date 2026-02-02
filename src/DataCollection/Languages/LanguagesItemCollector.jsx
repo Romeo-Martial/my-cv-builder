@@ -11,9 +11,10 @@ export default function LanguagesItemCollector({ data, onChange, step }) {
         onChange={e => onChange(e, step, id)}
         placeholder="e.g., English, Spanish"
       />
-      <p>
+      <p class="label">
         Proficiency Level:{' '}
         <select
+          class="select"
           name="level"
           value={level}
           onChange={e => onChange(e, step, id)}
