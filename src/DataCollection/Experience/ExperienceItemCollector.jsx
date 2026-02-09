@@ -11,12 +11,22 @@ function Responsibilities({
   const isUnique = responsibilities.length === 1;
   return (
     <>
-      <h4 className="it-section-title role-orientation">Responsibilities</h4>
+      <div className="repeater-actions">
+        <p className="it-label role-orientation">Responsibilities</p>{' '}
+        <button
+          className="btn btn--tertiary role-action"
+          onClick={() => onChildAdd('responsibilities', parentId)}
+        >
+          Add Responsibility
+        </button>
+      </div>
+      {/*don't forget to
+      define the information type */}
       <div className="it-repeater">
         {responsibilities.map((elt, index) => {
           return (
             <div className="it-repeater-item" key={elt.id}>
-              <div className="input-field">
+              <div className="input-field responsibility-item">
                 <Input
                   type="textarea"
                   label={'Responsibility' + ' ' + (index + 1)}
@@ -25,23 +35,17 @@ function Responsibilities({
                   onChange={e => onChange(e, step, parentId, elt.id)}
                   placeholder="Describe your key responsibilities..."
                 />
+                {!isUnique && (
+                  <button
+                    className="btn btn--tertiary btn--danger role-action"
+                    onClick={() =>
+                      onChildDelete('responsibilities', parentId, elt.id)
+                    }
+                  >
+                    X
+                  </button>
+                )}
               </div>
-              {!isUnique && (
-                <button
-                  className="btn btn--tertiary btn--danger it-btn-text role-action"
-                  onClick={() =>
-                    onChildDelete('responsibilities', parentId, elt.id)
-                  }
-                >
-                  X
-                </button>
-              )}
-              <button
-                className="btn btn--tertiary it-btn-text role-action"
-                onClick={() => onChildAdd('responsibilities', parentId)}
-              >
-                +
-              </button>
             </div>
           );
         })}
@@ -114,15 +118,9 @@ export default function ExperienceItemCollector({
           />
         </div>
       </div>
-      <button
-        className="btn btn--secondary it-btn-text role-action"
-        onClick={() => onAdd(step)}
-      >
-        Add Experience
-      </button>
       {!isUnique && (
         <button
-          className="btn btn--tertiary btn--danger it-btn-text role-action"
+          className="btn btn--tertiary btn--danger role-action"
           onClick={() => onDelete(step, id)}
         >
           Delete Experience

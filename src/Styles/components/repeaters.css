@@ -1,0 +1,71 @@
+/* --------------------------------------------
+   Repeater (ExperienceCollector)
+   -------------------------------------------- */
+.repeater-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.responsibility-item {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.responsibility-item .control {
+  flex: 1;
+  min-width: 0;
+}
+
+.responsibility-item button {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.repeater {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-3);
+}
+.repeater-footer {
+  /* margin-top: var(--space-4); */
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Each repeated "Experience {n}" block is currently a plain div inside .repeater */
+.repeater-item {
+  padding: var(--space-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+}
+
+.repeater-item > .it-section-subtitle {
+  margin-bottom: var(--space-3);
+}
+
+/* The ExperienceItemCollector renders a .stack inside.
+   Give it a little breathing room without adding random margins everywhere. */
+.repeater > div > .stack {
+  margin-top: var(--space-3);
+}
+
+/* Make the "Add Experience" button look like an action footer */
+.repeater > button {
+  justify-self: start;
+  margin-top: var(--space-2);
+}
+
+/* Optional: when there are many items, visually separate them a bit more */
+@media (min-width: 900px) {
+  .repeater > div {
+    padding: var(--space-5);
+  }
+}

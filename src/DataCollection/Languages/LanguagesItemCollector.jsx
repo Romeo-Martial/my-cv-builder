@@ -1,9 +1,15 @@
 import Input from '../Controls/Controls';
 
-export default function LanguagesItemCollector({ data, onChange, step }) {
+export default function LanguagesItemCollector({
+  data,
+  isUnique,
+  onChange,
+  onDelete,
+  step,
+}) {
   const { id, language, level } = data;
   return (
-    <>
+    <div className="stack">
       <Input
         name="language"
         label="Languages"
@@ -11,10 +17,10 @@ export default function LanguagesItemCollector({ data, onChange, step }) {
         onChange={e => onChange(e, step, id)}
         placeholder="e.g., English, Spanish"
       />
-      <p class="label">
-        Proficiency Level:{' '}
+      <p>
+        <span className="it-label">Proficiency Level: </span>
         <select
-          class="select"
+          className="select"
           name="level"
           value={level}
           onChange={e => onChange(e, step, id)}
@@ -26,6 +32,14 @@ export default function LanguagesItemCollector({ data, onChange, step }) {
           <option value="Native">Native</option>
         </select>
       </p>
-    </>
+      {!isUnique && (
+        <button
+          className="btn btn--tertiary btn--danger role-action"
+          onClick={() => onDelete(step, id)}
+        >
+          Delete Language
+        </button>
+      )}
+    </div>
   );
 }

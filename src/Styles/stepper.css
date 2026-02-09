@@ -1,49 +1,19 @@
-.stepper {
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-  align-items: center;
-  padding: var(--space-2);
-  background: var(--surface);
+/* Stepper track */
+.step-bar {
+  height: var(--stepper-bar-h);
+  background: var(--surface-2);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-}
-
-.step {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  height: var(--stepper-h);
-  padding: 0 var(--space-3);
   border-radius: 999px;
-  border: 1px solid transparent;
-  font-size: var(--text-sm);
-  line-height: 1;
-  color: var(--text-2);
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
 }
 
-/* Upcoming */
-.step--upcoming {
-  background: transparent;
-  border-color: var(--border);
-}
+/* Progress fill */
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  border-radius: inherit;
 
-/* Current */
-.step--current {
-  background: rgba(37, 99, 235, 0.1);
-  border-color: rgba(37, 99, 235, 0.35);
-  color: var(--brand);
-  font-weight: var(--fw-semibold);
-}
-
-/* Completed */
-.step--done {
-  background: rgba(22, 163, 74, 0.1);
-  border-color: rgba(22, 163, 74, 0.35);
-  color: var(--success);
-}
-
-/* Make steps clickable if you want navigation */
-.stepper a.step:hover {
-  border-color: var(--border-strong);
+  /* smooth progression */
+  transition: width 240ms ease-out;
 }

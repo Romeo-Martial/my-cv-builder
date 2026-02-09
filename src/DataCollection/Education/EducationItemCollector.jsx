@@ -1,6 +1,12 @@
 import Input from '../Controls/Controls';
 
-export default function EducationItemCollector({ data, onChange, step }) {
+export default function EducationItemCollector({
+  data,
+  isUnique,
+  onChange,
+  onDelete,
+  step,
+}) {
   const {
     id,
     program,
@@ -62,6 +68,14 @@ export default function EducationItemCollector({ data, onChange, step }) {
           />
         </div>
       </div>
+      {!isUnique && (
+        <button
+          className="btn btn--tertiary btn--danger role-action"
+          onClick={() => onDelete(step, id)}
+        >
+          Delete Education
+        </button>
+      )}
     </div>
   );
 }

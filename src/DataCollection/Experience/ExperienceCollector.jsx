@@ -12,12 +12,12 @@ export default function ExperienceCollector({
   const isUnique = data.length === 1;
   return (
     <div className="stack">
-      <h2 className="it-section-title role-instruction">Work Experience</h2>
+      <h2 className="it-section-title role-orientation">Work Experience</h2>
       <div className="repeater">
         {data.map((elt, index) => {
           return (
-            <div key={elt.id}>
-              <h3 className="it-section-subtitle role-instruction">
+            <div className="repeater-item" key={elt.id}>
+              <h3 className="it-section-subtitle role-orientation">
                 Experience {index + 1}
               </h3>
               <ExperienceItemCollector
@@ -33,6 +33,14 @@ export default function ExperienceCollector({
             </div>
           );
         })}
+        <div className="repeater-footer">
+          <button
+            className="btn btn--secondary it-btn-text role-action"
+            onClick={() => onAdd(step)}
+          >
+            Add Experience
+          </button>
+        </div>
       </div>
     </div>
   );

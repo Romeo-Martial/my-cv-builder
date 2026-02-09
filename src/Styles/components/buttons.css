@@ -15,13 +15,19 @@
   line-height: 1;
   cursor: pointer;
   user-select: none;
-  transition: transform 120ms ease, background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  transition:
+    transform 120ms ease,
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
 }
 
-.btn:active { transform: translateY(1px); }
+.btn:active {
+  transform: translateY(1px);
+}
 
 .btn:disabled,
-.btn[aria-disabled="true"] {
+.btn[aria-disabled='true'] {
   opacity: 0.55;
   cursor: not-allowed;
   transform: none;
@@ -32,7 +38,9 @@
   background: var(--brand);
   color: #fff;
 }
-.btn--primary:hover { background: var(--brand-2); }
+.btn--primary:hover {
+  background: var(--brand-2);
+}
 
 /* Secondary */
 .btn--secondary {
@@ -40,34 +48,61 @@
   background: var(--surface);
   border-color: var(--border);
   color: var(--text);
+  opacity: 0.9;
 }
-.btn--secondary:hover { border-color: var(--border-strong); }
+.btn--secondary:hover {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+  opacity: 1;
+}
 
 /* Tertiary */
 .btn--tertiary {
-  height: auto;
-  padding: 0;
-  background: transparent;
+  height: var(--control-h-xs);
+  padding: var(--space-2) var(--space-4);
   border: 0;
+  background: var(--brand-soft);
+  border-color: var(--border);
   color: var(--brand);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
-.btn--tertiary:hover { color: var(--brand-2); }
+.btn--tertiary:hover {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--brand-2);
+}
+.btn--danger {
+  color: var(--error);
+}
+
+.btn--tertiary.btn--danger {
+  background: rgba(220, 38, 38, 0.06);
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+.btn--tertiary.btn--danger:hover {
+  background: rgba(220, 38, 38, 0.12);
+  border-color: rgba(220, 38, 38, 0.4);
+}
 
 /* Loading state helper (optional)
    - Add .is-loading to button and a child .spinner
 */
-.btn.is-loading { pointer-events: none; }
+.btn.is-loading {
+  pointer-events: none;
+}
 .spinner {
   width: var(--icon);
   height: var(--icon);
   border-radius: 999px;
-  border: 2px solid rgba(255,255,255,0.45);
-  border-top-color: rgba(255,255,255,1);
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: rgba(255, 255, 255, 1);
   animation: spin 0.9s linear infinite;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* Focus ring for interactive elements */
 .btn:focus-visible,

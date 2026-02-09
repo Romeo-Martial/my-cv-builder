@@ -25,63 +25,67 @@ export default function SkillsCollector({
         Add your technical and soft skills to highlight your capabilities to
         employers.
       </p>
-      <Input
-        label="Technical Skills"
-        value={technicalInput}
-        onChange={e => handleSkillsChange(e, 'technical')}
-        placeholder="Enter your technical skills"
-      />
-      <button
-        className="btn btn--secondary role-action"
-        onClick={() => {
-          onChildAdd('technical', null, technicalInput);
-          setTechnicalInput('');
-        }}
-      >
-        Add
-      </button>
+      <div className="skills">
+        <Input
+          label="Technical Skills"
+          value={technicalInput}
+          onChange={e => handleSkillsChange(e, 'technical')}
+          placeholder="Enter your technical skills"
+        />
+        <button
+          className="btn btn--secondary role-action"
+          onClick={() => {
+            onChildAdd('technical', null, technicalInput);
+            setTechnicalInput('');
+          }}
+        >
+          Add
+        </button>
+      </div>
       {!isTechnicalEmpty && (
-        <ul className="it-repeater">
+        <ul className="it-skills-list">
           {technical.map(elt => (
-            <div className="it-repeater-item" key={elt.id}>
-              <li>{elt.text}</li>
+            <li className="it-skill-item" key={elt.id}>
+              <span className="it-skill-item-text">{elt.text}</span>
               <button
                 className="btn btn--tertiary btn--danger role-action"
                 onClick={() => onChildDelete('technical', null, elt.id)}
               >
                 x
               </button>
-            </div>
+            </li>
           ))}
         </ul>
       )}
-      <Input
-        label="Soft Skills"
-        value={softInput}
-        onChange={e => handleSkillsChange(e, 'soft')}
-        placeholder="Enter your soft skills"
-      />
-      <button
-        className="btn btn--secondary role-action"
-        onClick={() => {
-          onChildAdd('soft', null, softInput);
-          setSoftInput('');
-        }}
-      >
-        Add
-      </button>
+      <div className="skills">
+        <Input
+          label="Soft Skills"
+          value={softInput}
+          onChange={e => handleSkillsChange(e, 'soft')}
+          placeholder="Enter your soft skills"
+        />
+        <button
+          className="btn btn--secondary role-action"
+          onClick={() => {
+            onChildAdd('soft', null, softInput);
+            setSoftInput('');
+          }}
+        >
+          Add
+        </button>
+      </div>
       {!isSoftEmpty && (
-        <ul className="it-repeater">
+        <ul className="it-skills-list">
           {soft.map(elt => (
-            <div className="it-repeater-item" key={elt.id}>
-              <li>{elt.text}</li>
+            <li className="it-skill-item" key={elt.id}>
+              <span className="it-skill-item-text">{elt.text}</span>
               <button
                 className="btn btn--tertiary btn--danger role-action"
                 onClick={() => onChildDelete('soft', null, elt.id)}
               >
                 x
               </button>
-            </div>
+            </li>
           ))}
         </ul>
       )}
@@ -89,17 +93,23 @@ export default function SkillsCollector({
       <div className="it-writing-tips-section role-instruction">
         <h4 className="it-writing-tips-title">💡 Tips for Skills</h4>
         <ul className="it-writing-tips-list">
-          <li>
+          <li className="it-writing-tip">
             <strong>Technical Skills:</strong> Include programming languages,
             frameworks, tools, and technologies
           </li>
-          <li>
+          <li className="it-writing-tip">
             <strong>Soft Skills:</strong> Highlight interpersonal abilities and
             personal qualities
           </li>
-          <li>Be specific and relevant to your target role</li>
-          <li>Order skills by proficiency or relevance</li>
-          <li>Avoid redundancy between technical and soft skills</li>
+          <li className="it-writing-tip">
+            Be specific and relevant to your target role
+          </li>
+          <li className="it-writing-tip">
+            Order skills by proficiency or relevance
+          </li>
+          <li className="it-writing-tip">
+            Avoid redundancy between technical and soft skills
+          </li>
         </ul>
       </div>
     </div>

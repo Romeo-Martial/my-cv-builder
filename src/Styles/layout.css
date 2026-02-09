@@ -6,6 +6,10 @@
   margin: 0 auto;
   padding: var(--space-8) var(--space-4);
 }
+.form-column {
+  max-width: var(--form-max);
+  margin: 0 auto;
+}
 
 .stack > * + * {
   margin-top: var(--space-4);
@@ -16,8 +20,66 @@
   flex-wrap: wrap;
   align-items: center;
 }
+.cluster > * {
+  flex: 1 1 260px;
+}
+/* Allow items inside flex/grid to shrink instead of overflowing */
+.cluster > *,
+.repeater > *,
+.it-repeater-item,
 .input-field {
-  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.step-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+  max-width: var(--form-max);
+}
+.skills {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-3);
+  align-items: end;
+  /* display: flex;
+  gap: var(--space-3);
+  align-items: flex-end; */
+}
+.skills .control {
+  width: 100%;
+  min-width: 0;
+}
+.it-skills-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Each skill chip */
+.it-skill-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  padding: 6px 10px;
+  color: var(--text);
+  box-shadow: var(--shadow-1);
+}
+
+.it-skill-item-text {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
 }
 
 .split {

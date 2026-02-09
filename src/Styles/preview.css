@@ -1,0 +1,145 @@
+/* ================
+   Review layout
+   ================ */
+
+.review {
+  max-width: var(--doc-max); /* you have 900px */
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Footer */
+.review-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+}
+.review-page-header {
+  display: grid;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+/* Subtitle below main heading */
+.review-page-subtitle {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--text-3);
+  font-size: var(--text-base);
+  line-height: var(--lh-base);
+}
+
+/* ================
+   Review cards
+   ================ */
+
+.review-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+}
+
+.review-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.review-card__title {
+  margin: 0;
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+}
+
+.review-card__body {
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Make your existing h2 inside previews not fight the card title */
+/* .review-card h2 {
+  display: none;
+} */
+
+/* ================
+   Generic content styling (works with your current <p><strong>...)
+   ================ */
+
+.review-card p {
+  margin: 0;
+  line-height: var(--lh-base);
+  color: var(--text);
+}
+
+.review-card p + p {
+  margin-top: var(--space-2);
+}
+
+.review-card strong {
+  font-weight: var(--fw-semibold);
+  color: var(--text-2);
+}
+
+/* Lists (responsibilities, skills lists in DisplayObjects) */
+.review-card ul {
+  margin: var(--space-2) 0 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+.review-card li + li {
+  margin-top: var(--space-1);
+}
+
+/* Sub-blocks like "Experience 1" groups */
+.review-card > div > div,
+.review-card__body > div {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* Titles like "Experience 1", "Education 1" currently are <p> */
+.review-card p:first-of-type {
+  color: var(--text-3);
+}
+
+/* ================
+   Make nested groups look like subcards (Experience items, Education items...)
+   ================ */
+
+.review-group {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  background: var(--surface);
+}
+
+/* If you add className="review-group" on those wrapper divs, it will style nicely.
+   (But even without it, cards still look cleaner due to spacing rules above.) */
+
+/* ================
+   Responsive
+   ================ */
+
+@media (max-width: 640px) {
+  .review {
+    padding: var(--space-6) var(--space-3);
+  }
+
+  .review-card__header,
+  .review-card__body {
+    padding: var(--space-4);
+  }
+}

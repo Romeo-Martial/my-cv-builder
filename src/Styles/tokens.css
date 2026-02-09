@@ -86,8 +86,14 @@
   /* Component sizing */
   --control-h: 44px; /* inputs + primary buttons */
   --control-h-sm: 40px; /* secondary buttons */
+  --control--xs: 36px;
+  --control-w: 45ch;
+  --control-w-sm: 40px;
   --icon: 18px;
   --stepper-h: 36px;
+
+  /* Stepper bar height */
+  --stepper-bar-h: 6px;
 
   /* Focus ring */
   --ring: 0 0 0 2px var(--brand-soft);

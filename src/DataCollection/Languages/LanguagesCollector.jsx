@@ -15,26 +15,20 @@ export default function LanguagesCollector({
         List the languages you speak along with your proficiency levels to
         showcase your communication skills.
       </p>
-      <div className="it-repeater">
+      <div className="repeater">
         {data.map((elt, index) => {
           return (
-            <div className="it-repeater-item" key={elt.id}>
+            <div className="repeater-item" key={elt.id}>
               <h4 className="it-section-subtitle role-orientation">
                 Language {index + 1}
               </h4>
               <LanguagesItemCollector
                 data={elt}
+                isUnique={isUnique}
                 step={step}
                 onChange={onChange}
+                onDelete={onDelete}
               />
-              {!isUnique && (
-                <button
-                  className="btn btn--tertiary btn--danger role-action"
-                  onClick={() => onDelete(step, elt.id)}
-                >
-                  Delete Language
-                </button>
-              )}
             </div>
           );
         })}

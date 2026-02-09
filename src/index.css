@@ -1,8 +1,13 @@
 @import './Styles/reset.css';
-@import './Styles/typograpy.css';
+@import './Styles/base.css';
 @import './Styles/tokens.css';
 @import './Styles/layout.css';
+@import './Styles/roles.css';
 @import './Styles/surfaces.css';
-@import './Styles/buttons.css';
-@import './Styles/inputs.css';
+@import './Styles/components/buttons.css';
+@import './Styles/components/forms.css';
+@import './Styles/components/repeaters.css';
 @import './Styles/stepper.css';
+@import './Styles/information-types.css';
+@import './Styles/inputs.css';
+@import './Styles/preview.css';

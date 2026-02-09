@@ -1,10 +1,16 @@
 export default function SummaryPreview({ data, onEdit }) {
   return (
-    <>
-      <h2>Summary</h2>
-      <strong>Summary:</strong>
-      <p>{data}</p>
-      <button onClick={() => onEdit(1)}>Edit</button>
-    </>
+    <section className="review-card">
+      <header className="review-card__header">
+        <h2 className="review-card__title">Summary</h2>
+        <button className="btn btn--tertiary" onClick={() => onEdit(1)}>
+          Edit
+        </button>
+      </header>
+      <div className="review-card__body">
+        <strong>Summary:</strong>
+        <p>{data}</p>
+      </div>
+    </section>
   );
 }

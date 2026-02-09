@@ -1,0 +1,184 @@
+/* --------------------------------------------
+   4) Role typography classes (UI roles)
+   Map your semantic roles to these classes, not tags.
+   -------------------------------------------- */
+
+/* Orientation */
+.role-orientation {
+  color: var(--text);
+}
+.it-page-title {
+  font-size: var(--text-4xl);
+  line-height: var(--lh-4xl);
+  font-weight: var(--fw-semibold);
+  margin: 0;
+}
+.it-stepper {
+  display: flex;
+  flex-direction: column;
+  margin: var(--space-2) auto 0;
+  max-width: var(--form-max);
+}
+
+.it-stepper-title {
+  font-size: var(--text-3xl);
+  line-height: var(--lh-3xl);
+  font-weight: var(--fw-semibold);
+  align-self: center;
+  margin: 0;
+  margin-bottom: var(--space-6);
+}
+
+.it-section-title {
+  font-size: var(--text-lg);
+  line-height: var(--lh-lg);
+  font-weight: var(--fw-semibold);
+  margin: 0;
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+.it-section-title::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 999px;
+  margin-top: var(--space-2);
+}
+.it-section-subtitle {
+  font-size: var(--text-xl);
+  line-height: var(--lh-xl);
+  font-weight: var(--fw-semibold);
+  margin: 0;
+}
+
+/* Instructional */
+.role-instruction {
+  color: var(--text-2);
+  font-size: var(--text-base);
+  line-height: var(--lh-base);
+  margin: 0;
+}
+.it-constraint {
+  color: var(--text-3, var(--text-2));
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+}
+.it-section-instructions {
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.it-section-goal {
+  color: var(--text-2);
+}
+.it-guidelines {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: var(--surface-2, rgba(255, 255, 255, 0.02));
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+}
+.it-guidelines-title {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  margin: 0 0 var(--space-2);
+}
+.it-guidelines-list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.it-guidelines-item {
+  margin-top: var(--space-1);
+  color: var(--text-2);
+}
+.it-writing-tips-section {
+  margin-top: var(--space-8);
+  padding: var(--space-5);
+  background: var(--surface, rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+/* Subtle left accent bar (professional “info card” look) */
+.it-writing-tips-section::before {
+  content: '';
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-4);
+  bottom: var(--space-4);
+  width: 3px;
+  border-radius: 999px;
+  background: var(--accent, var(--primary, currentColor));
+  opacity: 0.9;
+}
+.it-writing-tips-title {
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  margin: 0 0 var(--space-2);
+  padding-left: calc(var(--space-6) - var(--space-2));
+}
+.it-writing-tips-list {
+  margin: 0;
+  margin-top: var(--space-2);
+  padding-left: calc(1.2rem + var(--space-4));
+}
+.it-writing-tip {
+  margin-top: var(--space-1);
+  color: var(--text-2);
+}
+.it-writing-tip strong {
+  color: var(--text);
+}
+
+/* Input roles */
+.it-label {
+  display: inline-block;
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text);
+  margin-bottom: var(--space-1);
+}
+
+/* Feedback roles */
+.role-feedback {
+  color: var(--text-3, var(--text-2));
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+}
+.it-constraint-evaluation {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2, rgba(255, 255, 255, 0.02));
+  color: var(--text);
+  font-weight: var(--fw-medium);
+}
+
+.it-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--error);
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--fw-medium);
+  margin: var(--space-2) 0 0;
+}
+.it-success {
+  color: var(--success);
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  font-weight: var(--fw-medium);
+  margin: var(--space-2) 0 0;
+}

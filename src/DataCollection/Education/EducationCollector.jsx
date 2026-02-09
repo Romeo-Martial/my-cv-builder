@@ -15,26 +15,22 @@ export default function EducationCollector({
         Provide details about your educational background, including degrees,
         certifications, and relevant coursework.
       </p>
-      <div className="it-repeater stack">
+      <div className="repeater stack">
         {data.map((elt, index) => {
           return (
-            <div className="it-repeater-item" key={elt.id}>
-              <h3 className="it-subsection-title role-orientation">
+            <div className="repeater-item" key={elt.id}>
+              <h3 className="it-section-subtitle role-orientation">
                 Education {index + 1}
               </h3>
+
               <EducationItemCollector
                 data={elt}
+                isUnique={isUnique}
                 onChange={onChange}
+                onDelete={onDelete}
                 step={step}
               />
-              {!isUnique && (
-                <button
-                  className="btn btn--tertiary btn--danger role-action"
-                  onClick={() => onDelete(step, elt.id)}
-                >
-                  Delete Education
-                </button>
-              )}
+              <div></div>
             </div>
           );
         })}

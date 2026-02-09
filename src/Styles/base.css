@@ -1,0 +1,30 @@
+/* --------------------------------------------
+   2) Global base styles (UI world defaults)
+   -------------------------------------------- */
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--lh-base);
+  font-weight: var(--fw-regular);
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* default paragraph rhythm (minimal) */
+p {
+  margin: 0 0 1em;
+}
+
+/* Links */
+a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+a:hover {
+  color: var(--brand-2);
+}

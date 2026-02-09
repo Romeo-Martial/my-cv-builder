@@ -46,7 +46,7 @@ export default function HeaderCollector({ data, onChange, step }) {
             type="tel"
           />
         </div>
-        <div className="input-field">
+        <div className="input-field input-field--full">
           <Input
             label="Email"
             name="email"

@@ -7,11 +7,11 @@ export default function Input({
   placeholder,
 }) {
   return (
-    <div>
-      <label>{label + ': '}</label>
+    <div className="control">
+      <label className="it-label">{label + ': '}</label>
       {type === 'textarea' ? (
         <textarea
-          class="textarea"
+          className="textarea"
           name={name}
           value={value}
           onChange={onChange}
@@ -19,7 +19,7 @@ export default function Input({
         />
       ) : (
         <input
-          class="input"
+          className="input"
           type={type}
           name={name}
           value={value}

@@ -4,6 +4,7 @@ export default function SummaryCollector({ data, onChange, step }) {
   const currentLength = data.length;
   const minLength = 50;
   const maxLength = 500;
+  const isValid = currentLength >= minLength;
   return (
     <div className="stack">
       <h2 className="it-section-title role-orientation">
@@ -18,11 +19,21 @@ export default function SummaryCollector({ data, onChange, step }) {
         <div className="it-guidelines">
           <h4 className="it-guidelines-title">Guidelines:</h4>
           <ul className="it-guidelines-list">
-            <li>Keep it concise but impactful (50-500 characters)</li>
-            <li>Highlight your most relevant skills and experience</li>
-            <li>Mention your career goals or what you're looking for</li>
-            <li>Use action words and specific achievements when possible</li>
-            <li>Tailor it to the type of roles you're applying for</li>
+            <li className="it-guidelines-item">
+              Keep it concise but impactful (50-500 characters)
+            </li>
+            <li className="it-guidelines-item">
+              Highlight your most relevant skills and experience
+            </li>
+            <li className="it-guidelines-item">
+              Mention your career goals or what you're looking for
+            </li>
+            <li className="it-guidelines-item">
+              Use action words and specific achievements when possible
+            </li>
+            <li className="it-guidelines-item">
+              Tailor it to the type of roles you're applying for
+            </li>
           </ul>
         </div>
       </div>
@@ -34,12 +45,16 @@ export default function SummaryCollector({ data, onChange, step }) {
         onChange={e => onChange(e, step)}
       />
       <div className="counter">
-        <div className="it-constraint-evaluation role-feedback">
+        <div
+          className={`it-constraint-evaluation role-feedback ${
+            isValid ? 'is-success' : 'is-warning'
+          }`}
+        >
           {currentLength}/{maxLength} characters
         </div>
-        <span className="it-constraint role-instruction">
+        <div className="it-constraint role-instruction">
           (Minimum {minLength} characters required)
-        </span>
+        </div>
       </div>
       <div className="it-writing-tips-section role-instruction">
         <h4 className="it-writing-tips-title">💡 Writing Tips:</h4>

@@ -23,19 +23,21 @@ export default function DataCollector({
     switch (step) {
       case 0:
         return (
-          <div className="container">
-            <HeaderCollector data={header} step={step} onChange={onChange} />
+          <div className="form-column">
+            <div className="form-card">
+              <HeaderCollector data={header} step={step} onChange={onChange} />
+            </div>
           </div>
         );
       case 1:
         return (
-          <div className="container">
+          <div className="form-column">
             <SummaryCollector data={summary} step={step} onChange={onChange} />
           </div>
         );
       case 2:
         return (
-          <div className="container">
+          <div className="form-column">
             <ExperienceCollector
               data={experience}
               step={step}
@@ -49,7 +51,7 @@ export default function DataCollector({
         );
       case 3:
         return (
-          <div className="container">
+          <div className="form-column">
             <SkillsCollector
               data={skills}
               step={step}
@@ -60,7 +62,7 @@ export default function DataCollector({
         );
       case 4:
         return (
-          <div className="container">
+          <div className="form-column">
             <EducationCollector
               data={education}
               step={step}
@@ -72,7 +74,7 @@ export default function DataCollector({
         );
       case 5:
         return (
-          <div className="container">
+          <div className="form-column">
             <LanguagesCollector
               data={languages}
               step={step}
@@ -86,19 +88,30 @@ export default function DataCollector({
   };
 
   return (
-    <div className="stack">
-      <h2 className="it-stepper role-orientation">Step {step + 1} of 6</h2>
-      <div className="step-bar"></div>
+    <div className="container stack">
+      <div className="it-stepper">
+        <h2 className="it-stepper-title role-orientation">
+          Step {step + 1} of 6
+        </h2>
+        <div className="step-bar">
+          <div
+            className="progress-bar"
+            style={{
+              width: `${((step + 1) / 6) * 100}%`,
+            }}
+          ></div>
+        </div>
+      </div>
       {currentCollector(step)}
-      <div>
+      <div className="step-footer">
         <button
-          className="btn btn--primary"
+          className="btn btn--secondary  role-action"
           disabled={step === 0}
           onClick={onPrevious}
         >
           Previous
         </button>
-        <button className="btn btn--primary" onClick={onNext}>
+        <button className="btn btn--primary role-action" onClick={onNext}>
           Next
         </button>
       </div>

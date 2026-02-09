@@ -1,27 +1,43 @@
-
-.field { display: grid; gap: var(--space-2); }
+/* --------------------------------------------
+   7) Inputs (critical)
+   -------------------------------------------- */
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+.input-field--full {
+  flex: 1 1 100%;
+}
 
 .input,
 .textarea,
 .select {
   width: 100%;
+  max-width: 100%;
   height: var(--control-h);
   padding: 0 var(--space-3);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
-  transition: border-color 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
 }
 
 .textarea {
   height: auto;
-  min-height: 120px;
+  min-height: 110px;
+  /* min-width: var(--control-w); */
+  line-height: 1.6;
   padding: var(--space-3);
   resize: vertical;
 }
 
-.select { appearance: none; }
+.select {
+  appearance: none;
+}
 
 .input:hover,
 .textarea:hover,
@@ -37,7 +53,10 @@
 }
 
 .input::placeholder,
-.textarea::placeholder { color: var(--text-3); }
+.textarea::placeholder {
+  color: var(--text-3);
+  font-weight: var(--fw-regular);
+}
 
 /* Filled state (optional):
    - You can add .is-filled on the field wrapper in JS when non-empty
@@ -51,9 +70,9 @@
 /* Invalid state:
    - Use aria-invalid="true" (preferred) or .is-invalid
 */
-.input[aria-invalid="true"],
-.textarea[aria-invalid="true"],
-.select[aria-invalid="true"],
+.input[aria-invalid='true'],
+.textarea[aria-invalid='true'],
+.select[aria-invalid='true'],
 .field.is-invalid .input,
 .field.is-invalid .textarea,
 .field.is-invalid .select {
@@ -72,10 +91,19 @@
 .counter {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: var(--space-2);
+  margin-top: var(--space-2);
   font-size: var(--text-xs);
   line-height: var(--lh-xs);
   color: var(--text-3);
 }
-.counter.is-warning { color: var(--warning); }
-.counter.is-error { color: var(--error); }
+.is-warning {
+  color: var(--warning);
+}
+.is-success {
+  color: var(--success);
+}
+.counter.is-error {
+  color: var(--error);
+}
