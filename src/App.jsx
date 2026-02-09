@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import DataCollector from './DataCollection/DataCollector';
-import DataPreview from './DataPreview/DataPreview';
+import DataReview from './DataReview/DataReview';
+import CvPreview from './cvPreview/cvPreview';
 import {
   validateHeader,
   validateSummary,
@@ -119,7 +120,7 @@ function App() {
     } else {
       setCvData(cvd => {
         const index = cvd[section].findIndex(elt => elt.id === parentId);
-        console.log('information', { name, value, step, parentId, index });
+
         return {
           ...cvd,
           [section]: [
@@ -344,17 +345,55 @@ function App() {
   function handleEdit(step) {
     setCurrentStep(step);
   }
-  function handlePreviewSubmit() {}
+  function handleReviewSubmit() {
+    setCurrentStep(cs => cs + 1);
+    console.log('current step', currentStep);
+  }
+  function handleBackToEdit() {
+    setCurrentStep(0);
+  }
+  function handleCvExport() {
+    // Create a new window with just the CV content
+    const printWindow = window.open('', '_blank');
+    const cvElement = document.querySelector('.cv');
+    const styles = Array.from(document.styleSheets)
+      .map(styleSheet => {
+        try {
+          return Array.from(styleSheet.cssRules)
+            .map(rule => rule.cssText)
+            .join('\n');
+        } catch (e) {
+          return '';
+        }
+      })
+      .join('\n');
 
-  return (
-    <>
-      {currentStep === 6 ? (
-        <DataPreview
-          data={cvData}
-          onEdit={handleEdit}
-          onSubmit={handlePreviewSubmit}
-        />
-      ) : (
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>CV Export</title>
+          <style>${styles}</style>
+        </head>
+        <body style="margin: 0; padding: 0; background: white;">
+          ${cvElement.outerHTML}
+        </body>
+      </html>
+    `);
+
+    printWindow.document.close();
+
+    // Wait for content to load then print
+    printWindow.onload = () => {
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 250);
+    };
+  }
+  const currentComponent = function (currentStep) {
+    if (currentStep >= 0 && currentStep <= 5) {
+      return (
         <DataCollector
           data={cvData}
           step={currentStep}
@@ -367,9 +406,39 @@ function App() {
           onPrevious={handlePrevious}
           onSubmit={handleCollectionSubmit}
         />
-      )}
-    </>
-  );
+      );
+    } else if (currentStep === 6) {
+      return (
+        <DataReview
+          data={cvData}
+          onEdit={handleEdit}
+          onSubmit={handleReviewSubmit}
+        />
+      );
+    } else {
+      return (
+        <>
+          <CvPreview data={cvData} />
+          <div className="step-footer">
+            <button
+              className="btn btn--secondary role-action"
+              onClick={handleBackToEdit}
+            >
+              Back To Edit
+            </button>
+            <button
+              className="btn btn--primary role-action"
+              onClick={handleCvExport}
+            >
+              Export PDF
+            </button>
+          </div>
+        </>
+      );
+    }
+  };
+
+  return <>{currentComponent(currentStep)}</>;
 }
 
 export default App;

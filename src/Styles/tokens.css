@@ -97,4 +97,12 @@
 
   /* Focus ring */
   --ring: 0 0 0 2px var(--brand-soft);
+
+  /* CV-specific tokens */
+  --cv-accent: #0066cc; /* blue accent like the CV */
+  --cv-text: #000000; /* black text */
+  --cv-muted: #333333; /* secondary text */
+  --cv-paper: #ffffff; /* paper */
+  --cv-rule: #000000; /* header rule */
+  --cv-max: 800px;
 }

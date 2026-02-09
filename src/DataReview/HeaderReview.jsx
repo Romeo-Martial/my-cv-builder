@@ -1,6 +1,6 @@
 import DisplayObject from './Controls/controls';
 
-export default function HeaderPreview({ data, onEdit }) {
+export default function HeaderReview({ data, onEdit }) {
   return (
     <section className="review-card">
       <header className="review-card__header">

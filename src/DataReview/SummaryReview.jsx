@@ -1,4 +1,4 @@
-export default function SummaryPreview({ data, onEdit }) {
+export default function SummaryReview({ data, onEdit }) {
   return (
     <section className="review-card">
       <header className="review-card__header">

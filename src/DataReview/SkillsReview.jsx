@@ -1,6 +1,6 @@
 import DisplayObjects from './Controls/controls';
 
-export default function SkillsPreview({ data, onEdit }) {
+export default function SkillsReview({ data, onEdit }) {
   return (
     <section className="review-card">
       <header className="review-card__header">

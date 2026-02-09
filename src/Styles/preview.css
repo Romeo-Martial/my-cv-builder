@@ -1,145 +1,290 @@
-/* ================
-   Review layout
-   ================ */
+/* ================================
+   CV Preview + Print (Colored)
+   ================================ */
 
-.review {
-  max-width: var(--doc-max); /* you have 900px */
-  margin: 0 auto;
-  padding: var(--space-8) var(--space-4);
-  display: grid;
-  gap: var(--space-4);
+/* If you wrap preview, use a shell */
+.cv-shell {
+  background: var(--bg);
+  padding: var(--space-6) var(--space-4);
 }
 
-/* Footer */
-.review-footer {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--border);
+/* Main document */
+.cv {
+  font-family: 'Times New Roman', Times, serif;
+  color: var(--cv-text);
+  background: var(--cv-paper);
+
+  max-width: var(--cv-max);
+  margin: var(--space-6) auto;
+  padding: var(--space-10) var(--space-12);
+
+  border: 2px solid var(--cv-rule);
+  box-shadow: var(--shadow-1);
+
+  font-size: var(--text-xs);
+  line-height: var(--lh-sm);
 }
-.review-page-header {
-  display: grid;
-  gap: var(--space-2);
+
+/* Header */
+.cv-header {
+  text-align: center;
+  padding-bottom: var(--space-5);
   margin-bottom: var(--space-2);
 }
 
-/* Subtitle below main heading */
-.review-page-subtitle {
+.cv-name {
   margin: 0;
-  max-width: 60ch;
-  color: var(--text-3);
-  font-size: var(--text-base);
+  font-size: var(--text-2xl);
+  line-height: var(--lh-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--cv-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cv-titleline {
+  margin: 0;
+  font-weight: var(--fw-bold);
+  color: var(--cv-text);
+  font-size: var(--text-xs);
+  padding-bottom: 0;
+  border-bottom: 2px solid var(--cv-rule);
+}
+
+.cv-contact {
+  margin: 0;
+  color: var(--cv-text);
+  font-size: var(--text-xs);
+}
+
+/* If you later render portfolio/github/linkedin as <a> */
+.cv a {
+  color: var(--cv-accent);
+  text-decoration: none;
+}
+
+/* Sections */
+.cv-section {
+  margin-top: var(--space-6);
+  text-align: left;
+}
+
+.cv-section:first-of-type {
+  margin-top: 0;
+}
+
+.cv-section-title {
+  margin: 0 0 var(--space-3) 0;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  color: var(--cv-accent);
+  border-bottom: 1px solid var(--cv-accent);
+  padding-bottom: var(--space-1);
+}
+
+/* Your summary paragraph */
+.cv-paragraph {
+  margin: 0 0 var(--space-2) 0;
+  color: var(--cv-text);
+  text-align: justify;
   line-height: var(--lh-base);
 }
 
-/* ================
-   Review cards
-   ================ */
-
-.review-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-1);
-  overflow: hidden;
+/* Experience items */
+.cv-item {
+  margin-top: var(--space-4);
 }
 
-.review-card__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: var(--space-4) var(--space-5);
-  background: var(--surface-2);
-  border-bottom: 1px solid var(--border);
-}
-
-.review-card__title {
-  margin: 0;
-  font-size: var(--text-lg);
-  line-height: var(--lh-lg);
-  font-weight: var(--fw-semibold);
-  color: var(--text);
-}
-
-.review-card__body {
-  padding: var(--space-5);
-  display: grid;
-  gap: var(--space-4);
-}
-
-/* Make your existing h2 inside previews not fight the card title */
-/* .review-card h2 {
-  display: none;
-} */
-
-/* ================
-   Generic content styling (works with your current <p><strong>...)
-   ================ */
-
-.review-card p {
-  margin: 0;
-  line-height: var(--lh-base);
-  color: var(--text);
-}
-
-.review-card p + p {
+.cv-item:first-child {
   margin-top: var(--space-2);
 }
 
-.review-card strong {
-  font-weight: var(--fw-semibold);
-  color: var(--text-2);
+.cv-item-title {
+  font-weight: var(--fw-bold);
+  color: var(--cv-text);
+  margin-bottom: var(--space-1);
 }
 
-/* Lists (responsibilities, skills lists in DisplayObjects) */
-.review-card ul {
-  margin: var(--space-2) 0 0;
-  padding-left: 18px;
-  color: var(--text);
+/* Remove bullet from experience title */
+.cv-item-title::before {
+  content: '';
 }
 
-.review-card li + li {
+/* Responsibilities list -> arrow bullets (➢) like your CV */
+.cv-bullets {
+  list-style: none;
+  margin: var(--space-1) 0 0 0;
+  padding: 0;
+}
+
+.cv-bullets li {
+  position: relative;
+  padding-left: var(--space-4);
   margin-top: var(--space-1);
+  color: var(--cv-text);
+  line-height: var(--lh-sm);
 }
 
-/* Sub-blocks like "Experience 1" groups */
-.review-card > div > div,
-.review-card__body > div {
-  display: grid;
-  gap: var(--space-3);
+.cv-bullets li::before {
+  content: '➢';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--cv-text);
+  font-size: 10px;
 }
 
-/* Titles like "Experience 1", "Education 1" currently are <p> */
-.review-card p:first-of-type {
-  color: var(--text-3);
+/* Technical skills paragraphs */
+.cv-section p {
+  margin: var(--space-2) 0;
+  color: var(--cv-text);
+  line-height: var(--lh-sm);
 }
 
-/* ================
-   Make nested groups look like subcards (Experience items, Education items...)
-   ================ */
-
-.review-group {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-  background: var(--surface);
+.cv-section p:first-of-type {
+  margin-top: var(--space-2);
 }
 
-/* If you add className="review-group" on those wrapper divs, it will style nicely.
-   (But even without it, cards still look cleaner due to spacing rules above.) */
+/* Skills labels */
+.cv-section p .cv-item-title {
+  font-weight: var(--fw-bold);
+  color: var(--cv-text);
+  margin-bottom: 0;
+}
 
-/* ================
-   Responsive
-   ================ */
+/* Prevent the skill label span from receiving any bullets */
+.cv-section p .cv-item-title::before {
+  content: '';
+}
 
+.cv-section p .cv-item-title {
+  color: var(--cv-text);
+}
+
+/* Education + Languages: you render multiple <ul> with one <li>
+   Make them look like a clean single list */
+.cv-section ul {
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cv-section ul li {
+  position: relative;
+  padding-left: var(--space-4);
+  margin-top: var(--space-1);
+  color: var(--cv-text);
+  line-height: var(--lh-sm);
+}
+
+.cv-section ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--cv-text);
+  font-weight: var(--fw-bold);
+}
+
+/* If LANGUAGES heading is using cv-item-title, cancel the bullet */
+.cv-section > .cv-item-title::before {
+  content: '';
+}
+
+/* Mobile preview */
 @media (max-width: 640px) {
-  .review {
-    padding: var(--space-6) var(--space-3);
+  .cv {
+    margin: 12px auto;
+    padding: 18px 16px;
+    border-radius: 10px;
+    font-size: 13px;
   }
 
-  .review-card__header,
-  .review-card__body {
-    padding: var(--space-4);
+  .cv-name {
+    font-size: 22px;
+  }
+}
+
+/* Print / PDF */
+@media print {
+  /* Hide everything by default when printing */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show only the CV and its contents */
+  .cv,
+  .cv * {
+    visibility: visible;
+  }
+
+  /* Position the CV at the top-left of the page */
+  .cv {
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+
+    font-size: 11.5pt;
+    line-height: 1.35;
+  }
+
+  /* Keep colors in print when possible */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  @page {
+    size: A4;
+    margin: 16mm 14mm;
+    /* Remove browser headers and footers */
+    @top-left {
+      content: '';
+    }
+    @top-center {
+      content: '';
+    }
+    @top-right {
+      content: '';
+    }
+    @bottom-left {
+      content: '';
+    }
+    @bottom-center {
+      content: '';
+    }
+    @bottom-right {
+      content: '';
+    }
+  }
+
+  /* Ensure full page background */
+  html,
+  body {
+    background: white !important;
+    height: 100% !important;
+  }
+
+  /* Make sure the CV takes up proper space */
+  .cv {
+    background: white !important;
+    min-height: 100vh;
+    width: 100%;
+  }
+
+  .cv-section,
+  .cv-item,
+  .cv-bullets,
+  .cv-section ul {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
