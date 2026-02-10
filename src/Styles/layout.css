@@ -1,5 +1,5 @@
 /* --------------------------------------------
-   3) Layout primitives
+   Layout primitives
    -------------------------------------------- */
 .container {
   max-width: var(--container-max);
@@ -45,9 +45,6 @@
   grid-template-columns: 1fr auto;
   gap: var(--space-3);
   align-items: end;
-  /* display: flex;
-  gap: var(--space-3);
-  align-items: flex-end; */
 }
 .skills .control {
   width: 100%;

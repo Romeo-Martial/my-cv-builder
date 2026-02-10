@@ -1,5 +1,5 @@
 /* --------------------------------------------
-   6) Buttons (Action roles)
+   Buttons (Action roles)
    -------------------------------------------- */
 .btn {
   display: inline-flex;
@@ -84,9 +84,6 @@
   border-color: rgba(220, 38, 38, 0.4);
 }
 
-/* Loading state helper (optional)
-   - Add .is-loading to button and a child .spinner
-*/
 .btn.is-loading {
   pointer-events: none;
 }

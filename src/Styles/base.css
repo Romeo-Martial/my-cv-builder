@@ -1,5 +1,5 @@
 /* --------------------------------------------
-   2) Global base styles (UI world defaults)
+   Global base styles (UI world defaults)
    -------------------------------------------- */
 html {
   font-size: 100%;
@@ -14,7 +14,7 @@ body {
   color: var(--text);
 }
 
-/* default paragraph rhythm (minimal) */
+/* default paragraph rhythm */
 p {
   margin: 0 0 1em;
 }

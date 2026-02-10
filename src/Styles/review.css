@@ -3,7 +3,7 @@
    ================ */
 
 .review {
-  max-width: var(--doc-max); /* you have 900px */
+  max-width: var(--doc-max);
   margin: 0 auto;
   padding: var(--space-8) var(--space-4);
   display: grid;
@@ -68,11 +68,6 @@
   gap: var(--space-4);
 }
 
-/* Make your existing h2 inside previews not fight the card title */
-/* .review-card h2 {
-  display: none;
-} */
-
 /* ================
    Generic content styling (works with your current <p><strong>...)
    ================ */
@@ -126,8 +121,6 @@
   background: var(--surface);
 }
 
-/* If you add className="review-group" on those wrapper divs, it will style nicely.
-   (But even without it, cards still look cleaner due to spacing rules above.) */
 
 /* ================
    Responsive

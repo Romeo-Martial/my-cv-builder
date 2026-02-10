@@ -1,5 +1,5 @@
 /* --------------------------------------------
-   0) CSS Reset (minimal, modern)
+   CSS Reset (minimal, modern)
    -------------------------------------------- */
 *,
 *::before,
@@ -39,4 +39,4 @@ a {
 
 :focus {
   outline: none;
-} /* we'll provide visible focus styles below */
+}

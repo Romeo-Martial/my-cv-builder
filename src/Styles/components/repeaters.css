@@ -38,7 +38,6 @@
   justify-content: flex-start;
 }
 
-/* Each repeated "Experience {n}" block is currently a plain div inside .repeater */
 .repeater-item {
   padding: var(--space-4);
   background: var(--surface);
@@ -51,8 +50,6 @@
   margin-bottom: var(--space-3);
 }
 
-/* The ExperienceItemCollector renders a .stack inside.
-   Give it a little breathing room without adding random margins everywhere. */
 .repeater > div > .stack {
   margin-top: var(--space-3);
 }
@@ -63,7 +60,7 @@
   margin-top: var(--space-2);
 }
 
-/* Optional: when there are many items, visually separate them a bit more */
+/*when there are many items, visually separate them a bit more */
 @media (min-width: 900px) {
   .repeater > div {
     padding: var(--space-5);

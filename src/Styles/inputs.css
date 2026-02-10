@@ -1,5 +1,5 @@
 /* --------------------------------------------
-   7) Inputs (critical)
+   Inputs (critical)
    -------------------------------------------- */
 .field {
   display: grid;
@@ -58,18 +58,12 @@
   font-weight: var(--fw-regular);
 }
 
-/* Filled state (optional):
-   - You can add .is-filled on the field wrapper in JS when non-empty
-*/
 .field.is-filled .input,
 .field.is-filled .textarea,
 .field.is-filled .select {
   background: var(--surface-2);
 }
 
-/* Invalid state:
-   - Use aria-invalid="true" (preferred) or .is-invalid
-*/
 .input[aria-invalid='true'],
 .textarea[aria-invalid='true'],
 .select[aria-invalid='true'],
