@@ -39,6 +39,18 @@ The focus of this project was to simulate a real production product rather than 
 - Works across mobile, tablet, and desktop
 - Built using reusable layout patterns
 
+### Data Persistence
+
+- Automatic localStorage integration saves form data in real-time
+- Prevents data loss on page refresh or accidental navigation
+- Seamlessly restores user progress across browser sessions
+
+### Reset Functionality
+
+- Complete data reset option with one-click clearing
+- Removes all saved data from both state and localStorage
+- Returns user to initial form state for fresh start
+
 ### Custom Design System
 
 The UI was built using a token-based CSS architecture including:
@@ -116,7 +128,6 @@ src/
 
 - Multiple CV templates
 - Routing and navigation flow
-- Auto-save functionality
 - Accessibility enhancements
 - Test coverage expansion
 
