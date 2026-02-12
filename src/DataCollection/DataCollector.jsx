@@ -16,6 +16,7 @@ export default function DataCollector({
   onChildDelete,
   onNext,
   onPrevious,
+  onReset,
 }) {
   const { header, summary, experience, skills, education, languages } = data;
 
@@ -110,6 +111,9 @@ export default function DataCollector({
           onClick={onPrevious}
         >
           Previous
+        </button>
+        <button className="btn btn--tertiary role action" onClick={onReset}>
+          Reset
         </button>
         <button className="btn btn--primary role-action" onClick={onNext}>
           Next

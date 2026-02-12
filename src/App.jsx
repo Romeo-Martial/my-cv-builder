@@ -360,6 +360,11 @@ function App() {
   function handleBackToEdit() {
     setCurrentStep(0);
   }
+  function handleReset() {
+    localStorage.removeItem('cvData');
+    setCurrentStep(0);
+    setCvData(defaultCvData);
+  }
   function handleCvExport() {
     // Create a new window with just the CV content
     const printWindow = window.open('', '_blank');
@@ -412,6 +417,7 @@ function App() {
           onChildDelete={handleChildDelete}
           onNext={handleNext}
           onPrevious={handlePrevious}
+          onReset={handleReset}
           onSubmit={handleCollectionSubmit}
         />
       );
