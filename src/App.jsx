@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import DataCollector from './DataCollection/DataCollector';
 import DataReview from './DataReview/DataReview';
 import CvPreview from './cvPreview/cvPreview';
+import { loadData, saveData } from './Utils/storage';
 import {
   validateHeader,
   validateSummary,
@@ -13,7 +14,7 @@ import {
 } from './Utils/validateData';
 
 function App() {
-  const [cvData, setCvData] = useState({
+  const defaultCvData = {
     header: {
       name: '',
       role: '',
@@ -52,6 +53,9 @@ function App() {
       },
     ],
     languages: [{ id: crypto.randomUUID(), language: '', level: '' }],
+  };
+  const [cvData, setCvData] = useState(() => {
+    return loadData(defaultCvData);
   });
   const [currentStep, setCurrentStep] = useState(0);
   const sections = [
@@ -63,6 +67,10 @@ function App() {
     'languages',
   ];
   const { header, summary, experience, skills, education, languages } = cvData;
+
+  useEffect(() => {
+    saveData(cvData);
+  }, [cvData]);
 
   function handlePrevious() {
     setCurrentStep(cs => cs - 1);
