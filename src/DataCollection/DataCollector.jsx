@@ -116,7 +116,6 @@ export default function DataCollector() {
       <div className="step-footer">
         <button
           className="btn btn--secondary  role-action"
-          disabled={currentStep === 0}
           onClick={handlePrevious}
         >
           Previous
