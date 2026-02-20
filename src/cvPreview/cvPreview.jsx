@@ -1,5 +1,8 @@
+import { useOutletContext } from 'react-router-dom';
+
 export default function CvPreview({ data }) {
-  const { header, summary, experience, skills, education, languages } = data;
+  const { cvData, handleBackToEdit, handleCvExport } = useOutletContext();
+  const { header, summary, experience, skills, education, languages } = cvData;
   const { portfolio, github, linkedin } = header.links;
   return (
     <article className="cv">

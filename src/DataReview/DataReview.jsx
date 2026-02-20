@@ -4,9 +4,11 @@ import ExperienceReview from './ExperienceReview';
 import SkillsReview from './SkillsReview';
 import EducationReview from './EducationReview';
 import LanguagesReview from './LanguagesReview';
+import { useOutletContext } from 'react-router-dom';
 
-export default function DataReview({ data, onEdit, onSubmit }) {
-  const { header, summary, experience, skills, education, languages } = data;
+export default function DataReview() {
+  const { cvData, handleEdit, handleReviewSubmit } = useOutletContext();
+  const { header, summary, experience, skills, education, languages } = cvData;
   return (
     <div className="review">
       <header className="review-page-header">
@@ -18,14 +20,14 @@ export default function DataReview({ data, onEdit, onSubmit }) {
           Check that everything is correct before downloading your CV.
         </p>
       </header>
-      <HeaderReview data={header} onEdit={onEdit} />
-      <SummaryReview data={summary} onEdit={onEdit} />
-      <ExperienceReview data={experience} onEdit={onEdit} />
-      <SkillsReview data={skills} onEdit={onEdit} />
-      <EducationReview data={education} onEdit={onEdit} />
-      <LanguagesReview data={languages} onEdit={onEdit} />
+      <HeaderReview data={header} onEdit={handleEdit} />
+      <SummaryReview data={summary} onEdit={handleEdit} />
+      <ExperienceReview data={experience} onEdit={handleEdit} />
+      <SkillsReview data={skills} onEdit={handleEdit} />
+      <EducationReview data={education} onEdit={handleEdit} />
+      <LanguagesReview data={languages} onEdit={handleEdit} />
       <div className="review-footer">
-        <button className="btn btn--primary" onClick={onSubmit}>
+        <button className="btn btn--primary" onClick={handleReviewSubmit}>
           Preview pdf
         </button>
       </div>

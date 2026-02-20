@@ -4,21 +4,22 @@ import ExperienceCollector from './Experience/ExperienceCollector';
 import SkillsCollector from './Skills/SkillsCollector';
 import EducationCollector from './Education/EducationCollector';
 import LanguagesCollector from './Languages/LanguagesCollector';
-import { useState } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
-export default function DataCollector({
-  data,
-  step,
-  onChange,
-  onAdd,
-  onChildAdd,
-  onDelete,
-  onChildDelete,
-  onNext,
-  onPrevious,
-  onReset,
-}) {
-  const { header, summary, experience, skills, education, languages } = data;
+export default function DataCollector() {
+  const {
+    cvData,
+    currentStep,
+    handleChange,
+    handleAdd,
+    handleChildAdd,
+    handleDelete,
+    handleChildDelete,
+    handleNext,
+    handlePrevious,
+    handleReset,
+  } = useOutletContext();
+  const { header, summary, experience, skills, education, languages } = cvData;
 
   const currentCollector = function (step) {
     switch (step) {
@@ -26,14 +27,22 @@ export default function DataCollector({
         return (
           <div className="form-column">
             <div className="form-card">
-              <HeaderCollector data={header} step={step} onChange={onChange} />
+              <HeaderCollector
+                data={header}
+                step={step}
+                onChange={handleChange}
+              />
             </div>
           </div>
         );
       case 1:
         return (
           <div className="form-column">
-            <SummaryCollector data={summary} step={step} onChange={onChange} />
+            <SummaryCollector
+              data={summary}
+              step={step}
+              onChange={handleChange}
+            />
           </div>
         );
       case 2:
@@ -42,11 +51,11 @@ export default function DataCollector({
             <ExperienceCollector
               data={experience}
               step={step}
-              onChange={onChange}
-              onAdd={onAdd}
-              onChildAdd={onChildAdd}
-              onDelete={onDelete}
-              onChildDelete={onChildDelete}
+              onChange={handleChange}
+              onAdd={handleAdd}
+              onChildAdd={handleChildAdd}
+              onDelete={handleDelete}
+              onChildDelete={handleChildDelete}
             />
           </div>
         );
@@ -56,8 +65,8 @@ export default function DataCollector({
             <SkillsCollector
               data={skills}
               step={step}
-              onChildAdd={onChildAdd}
-              onChildDelete={onChildDelete}
+              onChildAdd={handleChildAdd}
+              onChildDelete={handleChildDelete}
             />
           </div>
         );
@@ -67,9 +76,9 @@ export default function DataCollector({
             <EducationCollector
               data={education}
               step={step}
-              onChange={onChange}
-              onAdd={onAdd}
-              onDelete={onDelete}
+              onChange={handleChange}
+              onAdd={handleAdd}
+              onDelete={handleDelete}
             />
           </div>
         );
@@ -79,9 +88,9 @@ export default function DataCollector({
             <LanguagesCollector
               data={languages}
               step={step}
-              onChange={onChange}
-              onAdd={onAdd}
-              onDelete={onDelete}
+              onChange={handleChange}
+              onAdd={handleAdd}
+              onDelete={handleDelete}
             />
           </div>
         );
@@ -92,30 +101,30 @@ export default function DataCollector({
     <div className="container stack">
       <div className="it-stepper">
         <h2 className="it-stepper-title role-orientation">
-          Step {step + 1} of 6
+          Step {currentStep + 1} of 6
         </h2>
         <div className="step-bar">
           <div
             className="progress-bar"
             style={{
-              width: `${((step + 1) / 6) * 100}%`,
+              width: `${((currentStep + 1) / 6) * 100}%`,
             }}
           ></div>
         </div>
       </div>
-      {currentCollector(step)}
+      {currentCollector(currentStep)}
       <div className="step-footer">
         <button
           className="btn btn--secondary  role-action"
-          disabled={step === 0}
-          onClick={onPrevious}
+          disabled={currentStep === 0}
+          onClick={handlePrevious}
         >
           Previous
         </button>
-        <button className="btn btn--tertiary role action" onClick={onReset}>
+        <button className="btn btn--tertiary role action" onClick={handleReset}>
           Reset
         </button>
-        <button className="btn btn--primary role-action" onClick={onNext}>
+        <button className="btn btn--primary role-action" onClick={handleNext}>
           Next
         </button>
       </div>

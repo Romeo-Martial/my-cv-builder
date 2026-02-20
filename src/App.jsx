@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import DataCollector from './DataCollection/DataCollector';
-import DataReview from './DataReview/DataReview';
-import CvPreview from './cvPreview/cvPreview';
 import { loadData, saveData } from './Utils/storage';
 import {
   validateHeader,
@@ -12,6 +9,7 @@ import {
   validateEducation,
   validateLanguages,
 } from './Utils/validateData';
+import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 
 function App() {
   const defaultCvData = {
@@ -57,7 +55,7 @@ function App() {
   const [cvData, setCvData] = useState(() => {
     return loadData(defaultCvData);
   });
-  const [currentStep, setCurrentStep] = useState(0);
+
   const sections = [
     'header',
     'summary',
@@ -66,35 +64,55 @@ function App() {
     'education',
     'languages',
   ];
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isCvPreview = location.pathname.includes('/cvPreview');
+
   const { header, summary, experience, skills, education, languages } = cvData;
+
+  const getCurrentSection = () => {
+    const pathParts = location.pathname.split('/');
+    const lastPart = pathParts.at(-1);
+    return sections.includes(lastPart) ? lastPart : 'header';
+  };
+
+  const currentSection = getCurrentSection();
+  const currentStep = sections.indexOf(currentSection);
+  const nextStep = currentStep + 1;
+  const nextSection = sections[nextStep];
 
   useEffect(() => {
     saveData(cvData);
   }, [cvData]);
 
   function handlePrevious() {
-    setCurrentStep(cs => cs - 1);
+    navigate(-1);
   }
 
   function handleNext() {
     switch (currentStep) {
       case 0:
-        validateHeader(header) && setCurrentStep(cs => cs + 1);
+        validateHeader(header) &&
+          navigate(`/app/dataCollection/${nextSection}`);
         break;
       case 1:
-        validateSummary(summary) && setCurrentStep(cs => cs + 1);
+        validateSummary(summary) &&
+          navigate(`/app/dataCollection/${nextSection}`);
         break;
       case 2:
-        validateExperience(experience) && setCurrentStep(cs => cs + 1);
+        validateExperience(experience) &&
+          navigate(`/app/dataCollection/${nextSection}`);
         break;
       case 3:
-        validateSkills(skills) && setCurrentStep(cs => cs + 1);
+        validateSkills(skills) &&
+          navigate(`/app/dataCollection/${nextSection}`);
         break;
       case 4:
-        validateEducation(education) && setCurrentStep(cs => cs + 1);
+        validateEducation(education) &&
+          navigate(`/app/dataCollection/${nextSection}`);
         break;
       case 5:
-        validateLanguages(languages) && setCurrentStep(cs => cs + 1);
+        validateLanguages(languages) && navigate(`/app/dataReview`);
         break;
     }
   }
@@ -351,18 +369,18 @@ function App() {
   }
   function handleCollectionSubmit() {}
   function handleEdit(step) {
-    setCurrentStep(step);
+    const section = sections[step];
+    navigate(`/app/dataCollection/${section}`);
   }
   function handleReviewSubmit() {
-    setCurrentStep(cs => cs + 1);
-    console.log('current step', currentStep);
+    navigate('/app/cvPreview');
   }
   function handleBackToEdit() {
-    setCurrentStep(0);
+    navigate('/app/dataCollection/header');
   }
   function handleReset() {
     localStorage.removeItem('cvData');
-    setCurrentStep(0);
+    navigate('/app/dataCollection/header');
     setCvData(defaultCvData);
   }
   function handleCvExport() {
@@ -404,55 +422,51 @@ function App() {
       }, 250);
     };
   }
-  const currentComponent = function (currentStep) {
-    if (currentStep >= 0 && currentStep <= 5) {
-      return (
-        <DataCollector
-          data={cvData}
-          step={currentStep}
-          onChange={handleChange}
-          onAdd={handleAdd}
-          onChildAdd={handleChildAdd}
-          onDelete={handleDelete}
-          onChildDelete={handleChildDelete}
-          onNext={handleNext}
-          onPrevious={handlePrevious}
-          onReset={handleReset}
-          onSubmit={handleCollectionSubmit}
-        />
-      );
-    } else if (currentStep === 6) {
-      return (
-        <DataReview
-          data={cvData}
-          onEdit={handleEdit}
-          onSubmit={handleReviewSubmit}
-        />
-      );
-    } else {
-      return (
-        <>
-          <CvPreview data={cvData} />
-          <div className="step-footer">
-            <button
-              className="btn btn--secondary role-action"
-              onClick={handleBackToEdit}
-            >
-              Back To Edit
-            </button>
-            <button
-              className="btn btn--primary role-action"
-              onClick={handleCvExport}
-            >
-              Export PDF
-            </button>
-          </div>
-        </>
-      );
-    }
-  };
 
-  return <>{currentComponent(currentStep)}</>;
+  return (
+    <>
+      <Outlet
+        context={{
+          cvData,
+          currentStep,
+          handleChange,
+          handleAdd,
+          handleChildAdd,
+          handleDelete,
+          handleChildDelete,
+          handleNext,
+          handlePrevious,
+          handleReset,
+          handleCollectionSubmit,
+          handleEdit,
+          handleReviewSubmit,
+          handleBackToEdit,
+          handleCvExport,
+        }}
+      />
+      {isCvPreview && (
+        <div className="step-footer">
+          <Link to="/">
+            <button className="btn btn--secondary role-action">
+              Back To Home
+            </button>
+          </Link>
+          <button
+            className="btn btn--secondary role-action"
+            onClick={handleBackToEdit}
+          >
+            Back To Edit
+          </button>
+          <button
+            className="btn btn--primary role-action"
+            onClick={handleCvExport}
+          >
+            Export PDF
+          </button>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default App;
